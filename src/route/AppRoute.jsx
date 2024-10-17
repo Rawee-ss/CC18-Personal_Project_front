@@ -17,6 +17,7 @@ import OrderUser from "../page/user/OrderUser"
 import ProfileUser from "../page/user/ProfileUser"
 import StoreUser from "../page/user/StoreUser"
 import FavoriteUser from "../page/user/FavoriteUser"
+import UploadProduct from '../component/admin/FromCreateProduct'
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Home /> },
             { path: "products", element: <Products /> },
+            { path: "createProduct", element: <UploadProduct /> },
             { path: "order", element: <AdminOrder /> },
             { path: "category", element: <Category /> },
 

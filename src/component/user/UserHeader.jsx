@@ -11,7 +11,7 @@ export default function UserHeader() {
             <div className='flex w-full justify-between'>
                 <ul className=' flex items-center gap-4'>
                     <li><Link to={"/user"}>HOME</Link></li>
-                    <li><Link to={"/user/category"}>CATEGORY</Link></li>
+                    {/* <li><Link to={"/user/category"}>CATEGORY</Link></li> */}
                 </ul>
 
                 <div>

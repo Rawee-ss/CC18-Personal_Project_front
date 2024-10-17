@@ -18,10 +18,11 @@ export const AuthProvider = ({ children }) => {
                 const resp = await currentUser(token);
                 setUser(resp.data.user);
                 setRole(resp.data.role);
-            } catch (err) {
+            } catch (err) { 
                 toast.error('Failed to fetch user data. Please log in again.');
                 actionLogout();
             }
+            fetchUserData()
         }
     }, []);
 
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }) => {
 
     const actionLogout = () => {
         localStorage.clear();
-        setRole(null)
+        setRole(null);
         setUser(null);
         // setToken(null);
     };
