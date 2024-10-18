@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { creatProducts } from '../../api/ProductsApi';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
 }
 
 const UploadProduct = () => {
+  const { token } = useAuth()
   const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
@@ -43,9 +45,9 @@ const UploadProduct = () => {
     data.append('image', formData.image);
 
     console.log("FormData: ", formData)
-
+    console.log(token)
     try {
-      const result = await creatProducts(data);
+      const result = await creatProducts(token, data);
       console.log('Product uploaded:', result);
       setFormData(initialState);
     } catch (err) {
@@ -67,15 +69,19 @@ const UploadProduct = () => {
             required
           />
         </div>
-        <div className='m-5' >
+        <div className='m-5 ' >
           <label>Image:</label>
-          {formData.imagePreview && (
-            <img
-              src={formData.imagePreview}
-              alt="Preview"
-              className="w-50 h-50  mt-2"
-            />
-          )}
+          <div className='m-5 w-96 h-auto' >
+
+            {formData.imagePreview && (
+              <img
+                src={formData.imagePreview}
+                alt="Preview"
+                className=" mt-2 "
+              />
+
+            )}
+          </div>
           <input
             type="file"
             name="image"
@@ -86,8 +92,8 @@ const UploadProduct = () => {
         </div>
         <div className='m-5 bg-slate-100 flex justify-between items-center h-15 p-4 rounded-md'>
           <label><b>Price:</b></label>
-          <input 
-          className='p-3 h-8 w-[10vw] bg-green-500  text-white flex items-center rounded-sm'
+          <input
+            className='p-3 h-8 w-[15vw]  flex items-center rounded-sm'
             type="number"
             name="price"
             value={formData.price}
@@ -117,8 +123,8 @@ const UploadProduct = () => {
           />
         </div>
         <div className='flex justify-between m-5'>
-        <button className='bg-blue-900 text-white p-1 px-9 rounded ' type="submit">Upload</button>
-        <button className='bg-red-700 text-white p-1 px-9 rounded ' type="submit"><Link to={"/admin/products"}>Cancle</Link></button>
+          <button className='bg-blue-900 text-white p-1 px-9 rounded ' type="submit">Upload</button>
+          <button className='bg-red-700 text-white p-1 px-9 rounded ' type="submit"><Link to={"/admin/products"}>Cancle</Link></button>
         </div>
       </form>
     </div>

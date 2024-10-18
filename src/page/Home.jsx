@@ -14,15 +14,11 @@ export default function Home() {
   }, [])
 
   return (
-    <>
+    <div>
 
-      {products.map((item) => <div key={item.id}>{item.name}</div>
-      )}
+      {/* {products.map((item) => <div key={item.id}>{item.name}</div>)} */}
 
-      <div>
-        
-      </div>
-    </>
+    </div>
 
   )
 }

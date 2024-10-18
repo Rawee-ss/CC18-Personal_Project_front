@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { createCategory, getAllCategory, deleteCategory } from '../../api/CategoryApi'
-import { AuthProvider } from '../../context/AuthContext'
+import { AuthProvider, useAuth } from '../../context/AuthContext'
 import { toast } from 'react-toastify'
+import { getAccessToken } from '../../untils/LocalStorage'
 
 export const FromCategory = () => {
-    const token = AuthProvider((state) => state.token)
+    // const token = AuthProvider((state) => state.token)
+    // const { token } = useAuth()
+    const token = getAccessToken();
     const [name, setName] = useState("")
     const [categories, setCategories] = useState([])
 
@@ -12,7 +15,7 @@ export const FromCategory = () => {
 
         getCategory(token);
 
-    }, [])
+    }, [token])
 
 
     const getCategory = async (token) => {
@@ -42,7 +45,7 @@ export const FromCategory = () => {
     }
 
     const hdlDelete = async (id) => {
-        console.log(id)
+        console.log(id, token)
         try {
             const res = await deleteCategory(token, id)
             console.log(res)
@@ -52,20 +55,21 @@ export const FromCategory = () => {
             console.log(err)
         }
     }
+
     return (
         <div className='container mx-auto p-4 bg-white shadow-md'>
-            <h1>Category Management</h1>
-            <form className='my-4' onSubmit={hdlOnSubmit}>
-                <input onChange={(e) => setName(e.target.value)} className='border' type='text' />
-                <button className='bg-blue-900 text-white ml-20'>Add</button>
+            <h1 className=' text-blue-900 text-3xl ml-20'><b><u>Category</u></b></h1>
+            <form className=' m-10 flex justify-center items-center ' onSubmit={hdlOnSubmit}>
+                <input onChange={(e) => setName(e.target.value)} className='border w-[50vw] h-[10vh]' type='text' />
+                <button className='bg-blue-900 h-10 w-20  rounded-sm text-white ml-2'>Add</button>
 
 
             </form>
             <ul>
-                {categories.map((item) => (
+                {categories.map((item, index) => (
                     <li
                         className='flex justify-between'
-                        key={item.id}>
+                        key={index.id}>
                         <span>
                             {item.name}
                         </span>

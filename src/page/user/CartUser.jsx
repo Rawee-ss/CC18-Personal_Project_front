@@ -2,6 +2,17 @@ import React from 'react'
 
 export default function CartUser() {
   return (
-    <div>CartUser</div>
+    <div>
+
+      <div>
+        product
+      </div>
+
+      <div>
+        cart
+      </div>
+
+    </div>
   )
+
 }

@@ -10,7 +10,7 @@ const AdminHeader = () => {
 
 
   return (
-    <div className='bg-blue-950 text-white flex h-12 w-full items-center px-4 gap-4'>
+    <div className='bg-blue-950 text-white flex h-12 w-full items-center z-50 px-4 gap-4'>
       <a className='text-2xl font-bold'>
         LOGO
       </a>
@@ -23,7 +23,7 @@ const AdminHeader = () => {
         <div>
           <ul className='flex gap-4'>
             {/* <li><Link to={"/login"}>LOGIN</Link></li> */}
-            <AdminSidebar/>
+            <AdminSidebar />
           </ul>
         </div>
       </div>
