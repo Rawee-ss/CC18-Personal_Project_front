@@ -45,7 +45,7 @@ const UploadProduct = () => {
     data.append('image', formData.image);
 
     console.log("FormData: ", formData)
-    console.log(token)
+    // console.log(token)
     try {
       const result = await creatProducts(token, data);
       console.log('Product uploaded:', result);

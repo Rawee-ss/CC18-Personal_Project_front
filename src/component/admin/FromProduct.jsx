@@ -11,10 +11,10 @@ const initialState = {
     detail: "",
     price: 0.00,
     categoryId: "",
-    images: []
+    image: []
 }
 const FormProduct = () => {
- 
+
     const { token, getCategory, categories, getProduct, products } = useAuth()
 
     const [form, setForm] = useState(initialState)
@@ -108,8 +108,7 @@ const FormProduct = () => {
 
                                         <p
                                             className='bg-red-500 rounded-md p-1 shadow-md hover:scale-105 '
-                                            onClick={() => handleDelete(item.id)}
-                                        >
+                                            onClick={() => handleDelete(item.id)}>
                                             {/* <Trash /> */}
                                             Delete
 
