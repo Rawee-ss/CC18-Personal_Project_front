@@ -101,7 +101,7 @@ const FormProduct = () => {
                                     <td>{item.categoryId}</td>
                                     <td className='flex gap-2 justify-center items-center'>
                                         <p className='flex justify-center items-center bg-yellow-500 rounded-md p-1 hover:scale-105'>
-                                            <Link to={'/admin/product/' + item.id}>
+                                            <Link to={'/admin/editProduct/' + item.id}>
                                                 {/* <Pencil /> */}Edit
                                             </Link>
                                         </p>

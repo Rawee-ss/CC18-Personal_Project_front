@@ -19,6 +19,7 @@ import StoreUser from "../page/user/StoreUser"
 import FavoriteUser from "../page/user/FavoriteUser"
 import UploadProduct from '../component/admin/FromCreateProduct'
 import FromEditProduct from '../component/admin/FromEditProduct'
+import Dashboard from '../page/admin/Dashboard'
 
 
 const router = createBrowserRouter([
@@ -39,10 +40,10 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <ProtectRoute element={<AdminLayout />} allow={["ADMIN"]} />,
         children: [
-            { index: true, element: <Home /> },
+            { index: true, element: <Dashboard /> },
             { path: "products", element: <Products /> },
             { path: "createProduct", element: <UploadProduct /> },
-            { path: "editProduct", element: <FromEditProduct /> },
+            { path: "editProduct/:id", element: <FromEditProduct /> },
             { path: "order", element: <AdminOrder /> },
             { path: "category", element: <Category /> },
 

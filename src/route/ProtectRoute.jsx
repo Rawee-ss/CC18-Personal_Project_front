@@ -32,9 +32,9 @@ const ProtectRoute = ({ element, allow }) => {
         return <div>Loading...</div>; 
     }
 
-    // if (!isAllowed) {
-    //     return <Navigate to="/unauthorization" />;
-    // }
+    if (!isAllowed) {
+        return <Navigate to="/unauthorization" />;
+    }
 
     return element;
 };

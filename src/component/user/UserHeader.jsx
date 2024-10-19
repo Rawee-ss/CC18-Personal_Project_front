@@ -4,7 +4,7 @@ import UserSidebar from './UserSidebar'
 
 export default function UserHeader() {
     return (
-        <div className='bg-blue-950 text-white flex h-12 w-full items-center px-4 gap-4'>
+        <div className='bg-blue-950 text-white flex h-12 w-full items-center px-4 gap-4 z-50'>
             <a className='text-2xl font-bold'>
                 LOGO
             </a>

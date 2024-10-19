@@ -60,7 +60,7 @@ export const FromCategory = () => {
         <div className='container mx-auto p-4 bg-white shadow-md'>
             <h1 className=' text-blue-900 text-3xl ml-20'><b><u>Category</u></b></h1>
             <form className=' m-10 flex justify-center items-center ' onSubmit={hdlOnSubmit}>
-                <input onChange={(e) => setName(e.target.value)} className='border w-[50vw] h-[10vh]' type='text' />
+                <input onChange={(e) => setName(e.target.value)} className='border w-[50vw] h-[5vh]' type='text' />
                 <button className='bg-blue-900 h-10 w-20  rounded-sm text-white ml-2'>Add</button>
 
 

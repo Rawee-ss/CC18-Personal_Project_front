@@ -1,20 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// import { login } from '../../api/auth';
 import { login } from '../../api/AuthApi';
 import { useAuth } from '../../context/AuthContext';
 
 
-// const actionLogin = async(form) => {
-//     try {
-//         const response = await login(form);
-//         return response.data.role
-        
-//     } catch (err) {
-//         console.error("Login failed:", error);
-//         return null        
-//     }
-// }
+
 
 export default function Login() {
 
