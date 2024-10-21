@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
             setUser(resp.data.user);
             setToken(resp.data.token);
             setAccessToken(resp.data.token);
-            localStorage.setItem("user",JSON.stringify(resp.data.user))
+            // localStorage.setItem("user",JSON.stringify(resp.data.user))
             return resp.data.user.role;
         } catch (err) {
             toast.error('Login failed. Please try again.');

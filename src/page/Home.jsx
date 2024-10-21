@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     getAllProduct()
   }, [])
-  console.log("88888", products)
+  // console.log("88888", products)
   return (
     <div>
       <div className='overflow-y-auto'>

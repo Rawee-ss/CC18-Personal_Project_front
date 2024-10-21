@@ -20,21 +20,21 @@ export default function CartUser() {
 
         <div className='w-1/3 h-screen overflow-y-auto'>
           <div className='m-4 bg-slate-50 h-96 w-96 rounded border shadow-md '>
-            <h className="text-xl text-blue-900 flex justify-center p-7"><b>Order</b></h>
+            <h1 className="text-xl text-blue-900 flex justify-center p-7"><b>Order</b></h1>
             <div className='flex justify-center'>
               <hr className='bg-slate-200 w-72 mx-14 h-[1.5px] ' />
             </div>
             <div className='flex justify-center m-7 '>
               <input type='checkbox' />
-              <h className="ml-2 text-blue-900"><b>Transaction Payment</b></h>
+              <h1 className="ml-2 text-blue-900"><b>Transaction Payment</b></h1>
             </div>
             <div className='flex justify-center'>
               <hr className='bg-slate-200 w-72 mx-14 h-[1.5px] ' />
             </div>
 
             <div className='flex justify-between mx-14 mt-24'>
-                <h className="text-blue-900"><b>Total:</b></h>
-                <h className="text-blue-900"><b>฿ </b></h>
+                <h1 className="text-blue-900"><b>Total:</b></h1>
+                <h1 className="text-blue-900"><b>฿ </b></h1>
             </div>
             <div className='flex justify-center '>
               <Link to={"/user/payment"}>

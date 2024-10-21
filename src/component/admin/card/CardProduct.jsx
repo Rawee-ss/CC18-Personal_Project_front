@@ -1,13 +1,21 @@
 import { ShoppingCart } from 'lucide-react'
 import React from 'react'
-import { createCategory } from '../../../api/CartApi'
+import { createCart } from '../../../api/CartApi'
+import { getAccessToken } from '../../../untils/LocalStorage'
 
 const CardProduct = ({ item }) => {
     console.log(item)
 
     const addtoCart = async () => {
-        const resp = await createCategory()
+        const token = getAccessToken()
+        
+        try{
 
+            const resp = await createCart(token, item.id)
+        }catch(err){
+            console.log(err)
+        }
+        
     }
 
     return (
@@ -35,7 +43,7 @@ const CardProduct = ({ item }) => {
 
             <div className='flex justify-between items-center '>
                 <span className='text-sm font-bold text-blue-900'>฿ {item.price}</span>
-                <button className='bg-blue-900 rounded-md p-2 text-white hover:bg-blue-700 shadow-md '><ShoppingCart /></button>
+                <button className='bg-blue-900 rounded-md p-2 text-white hover:bg-blue-700 shadow-md ' onClick={addtoCart}><ShoppingCart /></button>
             </div>
 
         </div>
