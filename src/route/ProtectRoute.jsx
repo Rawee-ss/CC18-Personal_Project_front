@@ -8,9 +8,12 @@ import { getAccessToken } from "../untils/LocalStorage";
 const ProtectRoute = ({ element, allow }) => {
     const [isAllowed, setIsAllowed] = useState(null)
     const [loading, setLoading] = useState(true)
-    const { user, fetchUserData } = useAuth()
+    // const { user, fetchUserData } = useAuth()
     const token = getAccessToken()
-
+    const user = JSON.parse(localStorage.getItem("user"))
+    // console.log(user)
+    // console.log(JSON.stringify(user),"hi bro")
+    // console.log(token)
     useEffect(() => {
         const checkRole = async () => {
             try {
@@ -18,10 +21,13 @@ const ProtectRoute = ({ element, allow }) => {
                     const role = user.role;
                     console.log(role, allow.includes(role))
                     setIsAllowed(allow.includes(role));
+
                 } else {
-                    const resp = await currentUser(token)
-                    const role = resp.data.member.role
-                    setIsAllowed(allow.includes(role));
+                    // console.log("no user")
+                    // const resp = await currentUser(token)
+                    // const role = resp.data.member.role
+                    // setIsAllowed(allow.includes(role));
+                    setIsAllowed(false);
                 }
             } catch (err) {
                 console.error("Error fetching role:", err);
@@ -38,6 +44,7 @@ const ProtectRoute = ({ element, allow }) => {
         return <div>Loading...</div>;
     }
     console.log(isAllowed)
+
     if (!isAllowed) {
         return <Navigate to="/unauthorization" />;
     }

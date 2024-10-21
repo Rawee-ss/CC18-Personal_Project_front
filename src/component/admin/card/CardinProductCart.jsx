@@ -4,7 +4,7 @@ import { getCart } from '../../../api/CartApi';
 import { getAccessToken } from '../../../untils/LocalStorage';
 
 
-const CardinProductCart = () => {
+const CardinProductCart = ({ setTotal }) => {
     const [cart, setCart] = useState([])
     useEffect(() => {
         const fetchCart = async () => {
@@ -16,22 +16,33 @@ const CardinProductCart = () => {
         fetchCart()
     }, [])
 
+    const totalPrice = cart.reduce((acc, el) => {
+        return acc + el.price
+    }, 0)
+
+    setTotal(totalPrice)
+
+
+    // const hdlDeleteItem = ()
+    
+
+
     return (
         <div className="flex flex-col justify-between p-8">
-            {cart?.map((item,index) => (
+            {cart?.map((item, index) => (
 
                 <div key={index} className="w-full">
 
                     <div className="flex h-36 items-center ml-10 p-4 rounded-lg mb-4 shadow-md bg-slate-50">
-                        <input
+                        {/* <input
                             type="checkbox"
-                            className="mr-4" />
+                            className="mr-4" /> */}
 
                         <img className="w-24 h-24 rounded-lg object-cover"
-                            src={item.image}
-                            alt={item.name} 
-                            />
-                
+                            src={item.products.image}
+                            alt={item.products.name}
+                        />
+
                         <div className="ml-4 flex-1">
                             <h2 className="text-lg font-semibold mb-5 text-blue-900">name</h2>
                             <p className="text-gray-500">฿ {item.price}</p>

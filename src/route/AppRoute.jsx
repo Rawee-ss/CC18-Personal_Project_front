@@ -22,6 +22,8 @@ import FromEditProduct from '../component/admin/FromEditProduct'
 import Dashboard from '../page/admin/Dashboard'
 import FromPayment from '../component/user/FromPayment'
 import FromBill from '../component/user/FromBill'
+import CardinProductCart from '../component/admin/card/CardinProductCart'
+import FromProductDetail from '../component/user/FromProductDetail'
 
 
 const router = createBrowserRouter([
@@ -63,7 +65,9 @@ const router = createBrowserRouter([
             { path: "favorite", element: <FavoriteUser /> },
             { path: "category", element: <Category /> },
             { path: "payment", element: <FromPayment /> },
-            { path: "Bill", element: <FromBill /> },
+            { path: "bill", element: <FromBill /> },
+            { path: "product/:id", element: <FromProductDetail/> },
+            
 
 
         ]

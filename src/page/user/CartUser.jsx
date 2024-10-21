@@ -1,22 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CardinProductCart from '../../component/admin/card/CardinProductCart'
 import { Link } from 'react-router-dom'
 // import { Link } from 'lucide-react'
 
 export default function CartUser() {
+  const [total,setTotal] = useState(null)
   return (
     <div >
       <h1 className=' text-blue-900 text-3xl ml-20'><b><u>My Cart</u></b></h1>
       <div className='flex justify-between'>
 
-
         <div className='w-1/2 p-4 h-screen overflow-y-auto'>
 
-          <CardinProductCart/>
-
+          <CardinProductCart setTotal={setTotal}/>
 
         </div>
-
 
         <div className='w-1/3 h-screen overflow-y-auto'>
           <div className='m-4 bg-slate-50 h-96 w-96 rounded border shadow-md '>
@@ -25,8 +23,8 @@ export default function CartUser() {
               <hr className='bg-slate-200 w-72 mx-14 h-[1.5px] ' />
             </div>
             <div className='flex justify-center m-7 '>
-              <input type='checkbox' />
-              <h1 className="ml-2 text-blue-900"><b>Transaction Payment</b></h1>
+              <input type="radio" checked readOnly className="mr-2" />
+              <in className="ml-2 text-blue-900"><b>Transaction Payment</b></in>
             </div>
             <div className='flex justify-center'>
               <hr className='bg-slate-200 w-72 mx-14 h-[1.5px] ' />
@@ -34,7 +32,7 @@ export default function CartUser() {
 
             <div className='flex justify-between mx-14 mt-24'>
                 <h1 className="text-blue-900"><b>Total:</b></h1>
-                <h1 className="text-blue-900"><b>฿ </b></h1>
+                <h1 className="text-blue-900"><b>฿ {total}</b></h1>
             </div>
             <div className='flex justify-center '>
               <Link to={"/user/payment"}>

@@ -2,20 +2,22 @@ import { ShoppingCart } from 'lucide-react'
 import React from 'react'
 import { createCart } from '../../../api/CartApi'
 import { getAccessToken } from '../../../untils/LocalStorage'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const CardProduct = ({ item }) => {
     console.log(item)
 
     const addtoCart = async () => {
         const token = getAccessToken()
-        
-        try{
-
+        try {
             const resp = await createCart(token, item.id)
-        }catch(err){
+            toast.success("Added to cart successfully!")
+
+        } catch (err) {
             console.log(err)
+            toast.error("Failed to add to cart.")
         }
-        
     }
 
     return (
@@ -36,8 +38,9 @@ const CardProduct = ({ item }) => {
 
 
             <div className='py-2'>
-                <p className='text-xl text-blue-900'>{item.name}</p>
-
+                <Link to={`/user/product/${item.id}`}>
+                    <p className='text-xl text-blue-900 hover:text-blue-600'>{item.name}</p>
+                </Link>
             </div>
 
 

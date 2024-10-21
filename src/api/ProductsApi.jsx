@@ -15,6 +15,13 @@ export const getProducts = async (token, count = 20) => {
         }
     })
 }
+export const getProductDetail = async (token,id) => {
+    return await axios.get(`http://localhost:8000/products/detail/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
 
 export const updateProducts = async (token) => {
     return await axios.get("http://localhost:8000/products", {

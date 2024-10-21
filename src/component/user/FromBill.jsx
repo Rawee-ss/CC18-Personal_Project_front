@@ -11,7 +11,7 @@ const FromBill = () => {
 
                     {/* Order Items */}
                     <div className="space-y-4">
-                        {/* Item 1 */}
+                        {/* Item  */}
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <img
