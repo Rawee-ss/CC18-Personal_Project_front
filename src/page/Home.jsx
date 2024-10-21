@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getProducts } from '../api/ProductsApi'
-import CartProduct from '../component/admin/cart/CartProduct'
+import CardProduct from '../component/admin/card/CardProduct'
 
 
 
@@ -26,7 +26,7 @@ export default function Home() {
 
           {
             products.map((item, index) =>
-              <CartProduct key={index} item={item} />
+              <CardProduct key={index} item={item} />
             )
           }
 

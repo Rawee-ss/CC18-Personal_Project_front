@@ -7,15 +7,19 @@ import { useAuth } from '../../context/AuthContext';
 const initialState = {
     name: '',
     detail: '',
-    price: '',
+    price: 0.00,
     categoryId: '',
     image: null,
     imagePreview: null,
 }
 
 const FromEditProduct = () => {
-    const { token } = useAuth()
+    const { token, getProduct } = useAuth()
     const [formData, setFormData] = useState(initialState);
+
+    // useEffect(() => {
+    //     getProduct(token)
+    // }, [])
 
     const handleChange = (e) => {
 
@@ -122,9 +126,10 @@ const FromEditProduct = () => {
                         required
                     />
                 </div>
-                <div className='flex justify-between m-5'>
-                    <button className='bg-blue-900 text-white p-1 px-9 rounded ' type="submit">Upload</button>
-                    <button className='bg-red-700 text-white p-1 px-9 rounded ' type="submit"><Link to={"/admin/products"}>Cancle</Link></button>
+                <div className='flex justify-center  m-5'>
+                    <Link to={"/admin/Products"}>
+                        <button className='bg-blue-900 text-white p-1 px-9 rounded ' type="submit">Save</button>
+                    </Link>
                 </div>
             </form>
         </div>

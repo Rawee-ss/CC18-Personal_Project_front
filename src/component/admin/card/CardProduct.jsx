@@ -1,10 +1,17 @@
 import { ShoppingCart } from 'lucide-react'
 import React from 'react'
+import { createCategory } from '../../../api/CartApi'
 
-const CartProduct = ({ item }) => {
+const CardProduct = ({ item }) => {
     console.log(item)
+
+    const addtoCart = async () => {
+        const resp = await createCategory()
+
+    }
+
     return (
-        // <div> CartProduct</div>
+
         <div className='border rounded-md shadow-md p-2 w-48 hover:scale-110'>
 
             <div>
@@ -37,4 +44,4 @@ const CartProduct = ({ item }) => {
     )
 }
 
-export default CartProduct
+export default CardProduct

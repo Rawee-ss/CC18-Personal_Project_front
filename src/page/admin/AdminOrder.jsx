@@ -3,8 +3,8 @@ import React from 'react'
 export default function AdminOrder() {
   return (
     <div className='container mx-auto p-4 bg-white shadow-md my-5'>
-      <div className=' text-blue-900 text-3xl'><b><u>Order</u></b></div>
-      <div className='flex justify-center'>
+      <h1 className=' text-blue-900 text-3xl ml-20'><b><u>Order</u></b></h1>
+      <div className='flex justify-center items-center'>
 
         <label className="input input-bordered flex items-center gap-2 my-5 w-[50vw]">
           <input type="text" className="grow flex justify-center" placeholder="Search" />
@@ -19,9 +19,12 @@ export default function AdminOrder() {
               clipRule="evenodd" />
           </svg>
         </label>
+        <button className="bg-blue-900 text-white px-4 py-2 rounded-md ml-2 w-50 h-12 hover:bg-blue-700">
+          Search
+        </button>
       </div>
       <div>
-        
+
       </div>
     </div>
   )

@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 import { getAccessToken } from '../../untils/LocalStorage'
 
 export const FromCategory = () => {
-    // const token = AuthProvider((state) => state.token)
     // const { token } = useAuth()
     const token = getAccessToken();
     const [name, setName] = useState("")
@@ -60,8 +59,8 @@ export const FromCategory = () => {
         <div className='container mx-auto p-4 bg-white shadow-md'>
             <h1 className=' text-blue-900 text-3xl ml-20'><b><u>Category</u></b></h1>
             <form className=' m-10 flex justify-center items-center ' onSubmit={hdlOnSubmit}>
-                <input onChange={(e) => setName(e.target.value)} className='border w-[50vw] h-[5vh]' type='text' />
-                <button className='bg-blue-900 h-10 w-20  rounded-sm text-white ml-2'>Add</button>
+                <input onChange={(e) => setName(e.target.value)} className='border w-[50vw] h-10' type='text' />
+                <button className='bg-blue-900 h-10 w-20  rounded-md text-white ml-2 hover:bg-blue-700'>Add</button>
 
 
             </form>
@@ -73,7 +72,7 @@ export const FromCategory = () => {
                         <span>
                             {item.name}
                         </span>
-                        <button onClick={() => hdlDelete(item.id)}>Delete</button>
+                        {/* <button onClick={() => hdlDelete(item.id)}>Delete</button> */}
                     </li>
                 ))}
             </ul>

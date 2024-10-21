@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
 
 
-    const fetchUserData =async () => {
+    const fetchUserData = async () => {
         const token = getAccessToken();
         if (token) {
             try {
@@ -25,9 +25,9 @@ export const AuthProvider = ({ children }) => {
                 setToken(token)
             } catch (err) {
                 toast.error('Failed to fetch user data. Please log in again.');
-               // actionLogout();
+                // actionLogout();
             }
-      
+
         }
     };
 
@@ -48,11 +48,13 @@ export const AuthProvider = ({ children }) => {
     const actionLogin = async (form) => {
         try {
             const resp = await login(form);
+            console.log(resp.data.user,"hi jukkru")
             toast.success('Login success');
             setRole(resp.data.role)
             setUser(resp.data.user);
             setToken(resp.data.token);
             setAccessToken(resp.data.token);
+            localStorage.setItem("user",JSON.stringify(resp.data.user))
             return resp.data.user.role;
         } catch (err) {
             toast.error('Login failed. Please try again.');
@@ -87,7 +89,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ user, role, token, categories, products, actionRegister, actionLogin, actionLogout, getCategory, getProduct }}
+            value={{ user, role, token, categories, products, actionRegister, actionLogin, actionLogout, getCategory, getProduct, fetchUserData }}
         >
             {children}
         </AuthContext.Provider>

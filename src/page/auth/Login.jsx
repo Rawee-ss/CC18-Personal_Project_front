@@ -12,7 +12,8 @@ export default function Login() {
     const { actionLogin } = useAuth()
     const [form, setForm] = useState({
         userName: "",
-        password: ""
+        password: "",
+       
     })
     const [formErrors, setFormErrors] = useState({})
 
@@ -27,7 +28,7 @@ export default function Login() {
     const hdlOnSubmit = async (e) => {
         e.preventDefault()
         const role = await actionLogin(form)
-        console.log(role)
+        // console.log(role)
         if (role) {
 
             roleRedirect(role)

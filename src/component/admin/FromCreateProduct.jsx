@@ -7,7 +7,7 @@ import { useAuth } from '../../context/AuthContext';
 const initialState = {
   name: '',
   detail: '',
-  price: '',
+  price: 0.00,
   categoryId: '',
   image: null,
   imagePreview: null,

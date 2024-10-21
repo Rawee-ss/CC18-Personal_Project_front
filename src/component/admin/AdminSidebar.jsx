@@ -18,7 +18,7 @@ export default function AdminSidebar() {
 
   return (
 
-    <div className="drawer drawer-end">
+    <div className="drawer drawer-end z-50">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <label htmlFor="my-drawer-4" className="drawer-button cursor-pointer btn-primary">PROFILE ADMIN</label>
@@ -28,6 +28,7 @@ export default function AdminSidebar() {
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex justify-between">
           <div>
           <div className='text-2xl'><b>Profile</b></div>
+          <li className='my-1 text-xl'><Link to={"/admin/category"}><IoFileTrayOutline /> Category</Link></li>
           <li className='my-1 text-xl'><Link to={"/admin/products"}><IoFileTrayOutline /> Products</Link></li>
           <li className='my-1 text-xl'><Link to={"/admin/order"}><FaRegFolder />Order</Link></li>
           </div>

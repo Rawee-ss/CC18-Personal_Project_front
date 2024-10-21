@@ -20,6 +20,8 @@ import FavoriteUser from "../page/user/FavoriteUser"
 import UploadProduct from '../component/admin/FromCreateProduct'
 import FromEditProduct from '../component/admin/FromEditProduct'
 import Dashboard from '../page/admin/Dashboard'
+import FromPayment from '../component/user/FromPayment'
+import FromBill from '../component/user/FromBill'
 
 
 const router = createBrowserRouter([
@@ -60,6 +62,8 @@ const router = createBrowserRouter([
             { path: "store", element: <StoreUser /> },
             { path: "favorite", element: <FavoriteUser /> },
             { path: "category", element: <Category /> },
+            { path: "payment", element: <FromPayment /> },
+            { path: "Bill", element: <FromBill /> },
 
 
         ]
