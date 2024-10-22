@@ -15,8 +15,7 @@ const FromBill = () => {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <img
-                                    src="https://via.placeholder.com/50"
-                                    alt="img"
+                                   
                                     className="w-16 h-16 rounded-md bg-slate-200"
                                 />
                                 <div className="ml-4">

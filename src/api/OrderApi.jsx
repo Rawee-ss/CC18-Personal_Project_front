@@ -1,6 +1,8 @@
-import axios from "axios";
+// import axios from "axios";
+import axios from "../config/axios"
 
 
-export const saveOrder = (form) => {
-    return axios.post("http://localhost:8000/order", form)
+export const saveOrder = ( form) => {
+    return axios.post("/order", form)
+
 }

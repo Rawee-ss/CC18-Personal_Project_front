@@ -18,3 +18,13 @@ export const getCart = async (token) => {
         }
     })
 }
+
+
+export const deleteItemCart = async (token, cartItemId) => {
+    // console.log(cartItemId)
+    return await axios.delete(`http://localhost:8000/cart/${cartItemId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

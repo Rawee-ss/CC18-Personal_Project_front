@@ -4,15 +4,19 @@ import { Link } from 'react-router-dom'
 // import { Link } from 'lucide-react'
 
 export default function CartUser() {
-  const [total,setTotal] = useState(null)
+  const [total, setTotal] = useState(null)
+  const totalPrice = (total)=>{
+    setTotal(total)
+  }
+
   return (
     <div >
-      <h1 className=' text-blue-900 text-3xl ml-20'><b><u>My Cart</u></b></h1>
+      <h1 className=' text-blue-900 text-3xl ml-20 mt-10'><b><u>My Cart</u></b></h1>
       <div className='flex justify-between'>
 
         <div className='w-1/2 p-4 h-screen overflow-y-auto'>
 
-          <CardinProductCart setTotal={setTotal}/>
+          <CardinProductCart setTotal={totalPrice} />
 
         </div>
 
@@ -31,12 +35,12 @@ export default function CartUser() {
             </div>
 
             <div className='flex justify-between mx-14 mt-24'>
-                <h1 className="text-blue-900"><b>Total:</b></h1>
-                <h1 className="text-blue-900"><b>฿ {total}</b></h1>
+              <h1 className="text-blue-900"><b>Total:</b></h1>
+              <h1 className="text-blue-900"><b>฿ {total}</b></h1>
             </div>
             <div className='flex justify-center '>
               <Link to={"/user/payment"}>
-            <button className='bg-blue-900 p-2 rounded-md text-white m-8 hover:bg-blue-700'>Confirm order</button>
+                <button className='bg-blue-900 p-2 rounded-md text-white m-8 hover:bg-blue-700'>Confirm order</button>
               </Link>
 
             </div>

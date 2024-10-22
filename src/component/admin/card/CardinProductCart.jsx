@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Trash2 } from 'lucide-react';
-import { getCart } from '../../../api/CartApi';
+import { deleteItemCart, getCart } from '../../../api/CartApi';
 import { getAccessToken } from '../../../untils/LocalStorage';
 
 
@@ -16,15 +16,28 @@ const CardinProductCart = ({ setTotal }) => {
         fetchCart()
     }, [])
 
+
+
+
     const totalPrice = cart.reduce((acc, el) => {
         return acc + el.price
     }, 0)
-
+    
     setTotal(totalPrice)
 
 
     // const hdlDeleteItem = ()
-    
+    const hdlDeleteItem = async (itemId) => {
+        try {
+            const token = getAccessToken();
+            // console.log(token)
+            await deleteItemCart(token, itemId); 
+            setCart(prevCart => prevCart.filter(item => item.id !== itemId)); 
+            console.log(itemId)
+        } catch (error) {
+            console.error("Failed to delete item:", error);
+        }
+    };
 
 
     return (
@@ -47,7 +60,7 @@ const CardinProductCart = ({ setTotal }) => {
                             <h2 className="text-lg font-semibold mb-5 text-blue-900">name</h2>
                             <p className="text-gray-500">฿ {item.price}</p>
                         </div>
-                        <button className="text-gray-400 hover:text-red-600"><Trash2 /></button>
+                        <button className="text-gray-400 hover:text-red-600" onClick={() => hdlDeleteItem(item.id)}><Trash2 /></button>
                     </div>
 
                 </div>

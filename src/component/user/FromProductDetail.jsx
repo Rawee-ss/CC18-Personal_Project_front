@@ -50,7 +50,7 @@ const FromProductDetail = ({ item }) => {
 
         <div className="w-full flex justify-end items-center mb-4 ">
           <Link to={"/user"}>
-            <button className="text-xl font-bold text-white hover:bg-green-500 bg-green-600 rounded-sm p-2 h-auto w-auto" onClick={addtoCart}>฿ {product.price}</button>
+            <button className="flex justify-center items-centertext-xl font-semibold text-white hover:bg-green-500 bg-green-600 rounded-sm p-2 h-10 w-auto" onClick={addtoCart}>฿ {product.price}</button>
           </Link>
         </div>
 
