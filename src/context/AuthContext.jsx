@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import { getAccessToken, removeAccessToken, setAccessToken } from '../untils/LocalStorage';
 import { getAllCategory } from '../api/CategoryApi';
 import { getProducts } from '../api/ProductsApi';
+import { getOrderApi } from '../api/OrderApi';
+import { updateUserProfile } from '../api/UserProfileApi';
 
 const AuthContext = createContext();
 
@@ -13,6 +15,11 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null)
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
+    const [order, setOrder] = useState([]);
+    const [dataUser, setDataUser] = useState(null);
+
+
+    const [editValue,setEditValue ] = useState({})
 
 
     const fetchUserData = async () => {
@@ -21,6 +28,7 @@ export const AuthProvider = ({ children }) => {
             try {
                 const resp = await currentUser(token);
                 setUser(resp.data.member.userName);
+                setDataUser(resp.data.member)
                 setRole(resp.data.member.role);
                 setToken(token)
             } catch (err) {
@@ -42,6 +50,16 @@ export const AuthProvider = ({ children }) => {
             toast.success('register success');
         } catch (err) {
             toast.error('try register again');
+        }
+    };
+
+    const updateProfile = async (form) => {
+        console.log('form====', form)
+        try {
+            const resp = await updateUserProfile(form);
+            // toast.success('updateProfile success');
+        } catch (err) {
+            toast.error('try updateProfile again');
         }
     };
 
@@ -87,9 +105,26 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const getOrder = async () => {
+        try {
+            const res = await getOrderApi();
+            setOrder(res.data.getOrder);
+            console.log(res.data.getOrder)
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <AuthContext.Provider
-            value={{ user, role, token, categories, products, actionRegister, actionLogin, actionLogout, getCategory, getProduct, fetchUserData }}
+            value={{
+                editValue,
+                setEditValue,
+                 user, 
+                 role, 
+                 token, 
+                 categories, 
+                 products, actionRegister, actionLogin, dataUser, actionLogout, getCategory, getProduct, fetchUserData, getOrder, order, updateProfile }}
         >
             {children}
         </AuthContext.Provider>

@@ -5,9 +5,13 @@ import { Link } from 'react-router-dom'
 
 export default function CartUser() {
   const [total, setTotal] = useState(null)
-  const totalPrice = (total)=>{
+  const totalPrice = (total) => {
     setTotal(total)
   }
+
+  // const hdlSubmit = () => {
+
+  // }
 
   return (
     <div >

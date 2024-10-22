@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Trash2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { saveOrder } from '../../api/OrderApi';
 import { getAccessToken } from '../../untils/LocalStorage';
 import { getCart } from '../../api/CartApi';
@@ -12,6 +12,7 @@ const FromPayment = () => {
   const [slip, setSlip] = useState(null);
   const [cart, setCart] = useState([])
   const [cartId, setCartId] = useState(null)
+  const navigate = useNavigate()
 
   const handleSlipUpload = (e) => {
     setSlip(e.target.files[0]);
@@ -19,11 +20,14 @@ const FromPayment = () => {
 
   const hdlSaveOrder = async () => {
     console.log("click")
+    console.log("slip, cart,cartId",cartId)
     console.log(slip)
     const data = new FormData()
     data.append("image", slip)
-    data.append("cart", cartId)
+    data.append("cart", cart)
+    data.append("cartId", cartId)
     data.append("totalPrice", totalPrice)
+    navigate("/user/order")
     await saveOrder(data)
   }
 
@@ -116,11 +120,11 @@ const FromPayment = () => {
          
           <div className="mt-10 flex ">
             <div className="w-full mx-5">
-              <Link to={"/user/bill"}>
+              {/* <Link to={"/user/bill"}> */}
                 <button onClick={hdlSaveOrder} className="w-full  bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-700" >
                   Confirm order
                 </button>
-              </Link>
+              {/* </Link> */}
             </div>
             <div className="w-full">
               <Link to={"/user/cart"}>

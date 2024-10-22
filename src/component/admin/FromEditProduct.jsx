@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { creatProducts } from '../../api/ProductsApi';
-import { Link } from 'react-router-dom';
+import { creatProducts, getProductDetail, updateProducts } from '../../api/ProductsApi';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { getAccessToken } from '../../untils/LocalStorage';
 
 
 const initialState = {
@@ -14,11 +15,30 @@ const initialState = {
 }
 
 const FromEditProduct = () => {
-    const { token, getProduct } = useAuth()
-    const [formData, setFormData] = useState(initialState);
+    const { token, getProduct, editValue } = useAuth()
+    const { id } = useParams()
+    // const [formData, setFormData] = useState({});
+    const [product, setProduct] = useState([])
+    const navigate = useNavigate()
+
+
+    const fetchProduct = async () => {
+        const token = getAccessToken()
+        const resp = await getProductDetail(token, id)
+        console.log(resp.data.products)
+        setProduct(resp.data.products)
+    }
+
+    console.log(product)
+
+    useEffect(() => {
+        fetchProduct()
+    }, [])
 
     // useEffect(() => {
-    //     getProduct(token)
+    //     const newData = { ...editValue }
+    //     newData.image = null
+    //     setFormData(newData)
     // }, [])
 
     const handleChange = (e) => {
@@ -26,15 +46,14 @@ const FromEditProduct = () => {
         if (e.target.name === 'image') {
             const file = e.target.files[0];
             if (file) {
-                setFormData({
-                    ...formData,
+                setProduct({
+                    ...product,
                     image: file,
                     imagePreview: URL.createObjectURL(file),
                 });
             }
         } else {
-
-            setFormData({ ...formData, [e.target.name]: e.target.value });
+            setProduct({ ...product, [e.target.name]: e.target.value });
         }
     };
 
@@ -42,18 +61,28 @@ const FromEditProduct = () => {
         e.preventDefault();
 
         const data = new FormData();
-        data.append('name', formData.name);
-        data.append('detail', formData.detail);
-        data.append('price', formData.price);
-        data.append('categoryId', formData.categoryId);
-        data.append('image', formData.image);
+        data.append('name', product.name);
+        data.append('detail', product.detail);
+        data.append('price', product.price);
+        data.append('categoryId', product.categoryId);
 
-        console.log("FormData: ", formData)
+        if(product.image) {
+            data.append('image', product.image);
+        }
+
+
+
+        console.log("FormData: ", product)
         // console.log(token)
         try {
-            const result = await creatProducts(token, data);
+
+            const result = await updateProducts(token, data, id);
+
             console.log('Product uploaded:', result);
-            setFormData(initialState);
+
+            // setFormData(initialState);
+            navigate("/admin/products")
+
         } catch (err) {
             console.log('Error uploading product:', err);
         }
@@ -63,23 +92,24 @@ const FromEditProduct = () => {
         <div className='flex justify-center container mx-auto p-4 bg-white shadow-md mt-10'>
             <form onSubmit={handleSubmit} >
                 <div className='my-5'>
-                    <label className='text-3xl'><b>Name:</b></label>
+                    <label className='text-3xl'><b>Name: </b></label>
                     <input
                         className='text-3xl '
                         type="text"
                         name="name"
-                        value={formData.name}
+                        value={product?.name}
                         onChange={handleChange}
                         required
                     />
                 </div>
                 <div className='m-5 ' >
-                    <label>Image:</label>
+                    <img
+                        src={product?.imagePreview  || product?.image} />
                     <div className='m-5 w-96 h-auto' >
 
-                        {formData.imagePreview && (
+                        {product?.imagePreview && (
                             <img
-                                src={formData.imagePreview}
+                                src={product?.imagePreview}
                                 alt="Preview"
                                 className=" mt-2 "
                             />
@@ -91,16 +121,15 @@ const FromEditProduct = () => {
                         name="image"
                         accept="image/*"
                         onChange={handleChange}
-                        required
                     />
                 </div>
                 <div className='m-5 bg-slate-100 flex justify-between items-center h-15 p-4 rounded-md'>
-                    <label><b>Price:</b></label>
+                    <label><b>Price: </b></label>
                     <input
                         className='p-3 h-8 w-[15vw]  flex items-center rounded-sm'
-                        type="number"
+                        type="text"
                         name="price"
-                        value={formData.price}
+                        value={product?.price}
                         onChange={handleChange}
                         required
                     />
@@ -110,7 +139,7 @@ const FromEditProduct = () => {
                     <input
                         type="text"
                         name="categoryId"
-                        value={formData.categoryId}
+                        value={product?.categoryId}
                         onChange={handleChange}
                         required
                     />
@@ -121,15 +150,15 @@ const FromEditProduct = () => {
                         className='mt-1 block w-full h-24 p-2 border border-gray-300 rounded-md bg-slate-100 break-words whitespace-pre-wrap resize-none'
                         name="detail"
                         type="text"
-                        value={formData.detail}
+                        value={product?.detail}
                         onChange={handleChange}
                         required
                     />
                 </div>
                 <div className='flex justify-center  m-5'>
-                    <Link to={"/admin/Products"}>
+                    <div >
                         <button className='bg-blue-900 text-white p-1 px-9 rounded ' type="submit">Save</button>
-                    </Link>
+                    </div>
                 </div>
             </form>
         </div>

@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export default function StoreUser() {
+
+  const { getOrder, order, getProduct, products } = useAuth()
+  console.log('order here', order)
+  console.log('products here', products)
+
+  useEffect(() => {
+    getOrder()
+    getProduct()
+  }, [])
+
   return (
     <div className='p-4 bg-white  my-5 '>
       <h1 className=' text-blue-900 text-3xl ml-20'><b><u>Store</u></b></h1>
@@ -19,20 +30,20 @@ export default function StoreUser() {
           </button>
         </div>
 
-          <div className=" hover:scale-105 flex h-48 justify-center items-center p-4 rounded-lg shadow-md bg-slate-50 border w-[50vw] ">
-            <img className="ml-10 w-48 h-40 rounded-lg object-cover" />
+          {products.map((item) => (
+            <div key={item.id} className=" hover:scale-105 m-3 flex h-48 justify-center items-center p-4 rounded-lg shadow-md bg-slate-50 border w-[50vw] ">
+            <img src={item.image} className="ml-10 w-48 h-40 rounded-lg object-cover" />
             <div className="ml-4 flex-1">
-              <h2 className="text-xl font-semibold mb-5 text-blue-900">name</h2>
-              <button className="text-gray-500 text-[12px] font-semibold hover:text-purple-600">INSTALL</button>
+              <h2 className="text-xl font-semibold mb-5 text-blue-900">{item.name}</h2>
             </div>
             <div className="text-right flex-1 ">
-              <p className="text-sm text-gray-500 mr-5 mb-2">Date</p>
               <Link to={"/user/store-product"}>
               <button className="text-blue-900 hover:text-blue-600 w-10 h-10"><ChevronRight /></button>
               </Link>
             </div>
 
         </div>
+          ))}
       </div>
     </div>)
 }

@@ -33,7 +33,7 @@ const CardinProductCart = ({ setTotal }) => {
             // console.log(token)
             await deleteItemCart(token, itemId); 
             setCart(prevCart => prevCart.filter(item => item.id !== itemId)); 
-            console.log(itemId)
+            // console.log(item.id)
         } catch (error) {
             console.error("Failed to delete item:", error);
         }
@@ -57,7 +57,7 @@ const CardinProductCart = ({ setTotal }) => {
                         />
 
                         <div className="ml-4 flex-1">
-                            <h2 className="text-lg font-semibold mb-5 text-blue-900">name</h2>
+                            <h2 className="text-lg font-semibold mb-5 text-blue-900">{item.products.name}</h2>
                             <p className="text-gray-500">฿ {item.price}</p>
                         </div>
                         <button className="text-gray-400 hover:text-red-600" onClick={() => hdlDeleteItem(item.id)}><Trash2 /></button>

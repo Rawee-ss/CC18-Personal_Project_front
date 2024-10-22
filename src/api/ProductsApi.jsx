@@ -15,7 +15,7 @@ export const getProducts = async (token, count = 20) => {
         }
     })
 }
-export const getProductDetail = async (token,id) => {
+export const getProductDetail = async (token, id) => {
     return await axios.get(`http://localhost:8000/products/detail/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -23,16 +23,17 @@ export const getProductDetail = async (token,id) => {
     })
 }
 
-export const updateProducts = async (token) => {
-    return await axios.get("http://localhost:8000/products", {
+export const updateProducts = async (token, form, id) => {
+    return await axios.patch(`http://localhost:8000/products/${id}`, form, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
 }
 
-export const deleteProduct = async (token, id) => {
-    return axios.delete('http://localhost:8000/products/' + id, {
+export const deleteProduct = async (token, productId) => {
+    console.log(productId)
+    return axios.delete(`http://localhost:8000/products/${productId}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }

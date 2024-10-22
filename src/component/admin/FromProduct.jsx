@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useAuth, AuthProvider } from '../../context/AuthContext'
 import { creatProducts, deleteProduct } from '../../api/ProductsApi'
 import UploadProduct from './FromCreateProduct'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { getAccessToken } from '../../untils/LocalStorage'
 
 
 
@@ -14,10 +15,12 @@ const initialState = {
     image: []
 }
 const FormProduct = () => {
-
-    const { token, getCategory, categories, getProduct, products } = useAuth()
-
+    const { token, getCategory, categories, getProduct, products ,
+        setEditValue,} = useAuth()
     const [form, setForm] = useState(initialState)
+    const [productsItem, setProductsItem] = useState([])
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         getCategory(token)
@@ -44,20 +47,24 @@ const FormProduct = () => {
             console.log(err)
         }
     }
-    const handleDelete = async (id) => {
-        if (window.confirm('Confirm Delete?')) {
-            try {
-                const res = await deleteProduct(token, id)
-                console.log(res)
-                getProduct()
-            } catch (err) {
-                console.log(err)
-            }
+    const handleDelete = async (productId) => {
+        console.log(productId)
+        try {
+            const token = getAccessToken();
+            console.log(token)
+            await deleteProduct(token, productId);
 
+            getProduct(token)
+        } catch (error) {
+            console.error("Failed to delete product:", error);
         }
+    };
+    const handleEdit = (item) => {
+        setEditValue(item)
+        navigate('/admin/editProduct/' + item.id)
     }
-
-
+console.log("object")
+const showProduct = products.filter(item => !item.isDelete)
     return (
         <div>
             <hr />
@@ -77,7 +84,7 @@ const FormProduct = () => {
                 <tbody>
 
                     {
-                        products.map((item, index) => {
+                        showProduct.map((item, index) => {
                             // console.log(item)
                             return (
                                 <tr key={index}>
@@ -101,9 +108,9 @@ const FormProduct = () => {
                                     <td>{item.categoryId}</td>
                                     <td className='flex gap-2 justify-center items-center'>
                                         <p className='flex justify-center items-center bg-yellow-500 rounded-md p-1 hover:scale-105'>
-                                            <Link to={'/admin/editProduct/' + item.id}>
+                                            <div onClick={()=>handleEdit(item)}  >
                                                 {/* <Pencil /> */}Edit
-                                            </Link>
+                                            </div>
                                         </p>
 
                                         <p
