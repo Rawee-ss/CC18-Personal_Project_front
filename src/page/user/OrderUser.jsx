@@ -38,7 +38,7 @@ export default function OrderUser() {
           <div className="text-right flex-1 ">
             <p className="text-sm text-gray-500 mr-5 mb-2">Date: {new Date(item.updatedAt).toLocaleDateString("en-GB")}</p>
             <button className="text-blue-900 hover:text-blue-600 w-10 h-10"><ChevronRight /></button>
-            <p className='text-green-500 mr-5'>status: {item.paymentStatus}</p>
+            <p className='text-green-500 mr-5'>Status: {item.paymentStatus}</p>
           </div>
         </div>
         ))}

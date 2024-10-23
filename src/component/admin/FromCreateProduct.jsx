@@ -41,7 +41,7 @@ const UploadProduct = () => {
     data.append('name', formData.name);
     data.append('detail', formData.detail);
     data.append('price', formData.price);
-    data.append('categoryId', formData.categoryId);
+    // data.append('categoryId', formData.categoryId);
     data.append('image', formData.image);
 
     console.log("FormData: ", formData)
@@ -101,7 +101,7 @@ const UploadProduct = () => {
             required
           />
         </div>
-        <div className='m-5'>
+        {/* <div className='m-5'>
           <label><b>Category:</b></label>
           <input
             type="text"
@@ -110,7 +110,7 @@ const UploadProduct = () => {
             onChange={handleChange}
             required
           />
-        </div >
+        </div > */}
         <div className=' m-5'>
           <label><b>Detail:</b></label>
           <textarea

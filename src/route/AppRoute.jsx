@@ -28,6 +28,7 @@ import FromProductDetailUser from '../component/user/FromProductDetailUser'
 import FromProductDetailAdmin from '../component/admin/FromProductDetailAdmin'
 import HomeAdmin from '../page/admin/HomeAdmin'
 import HomeUser from '../page/user/HomeUser'
+import ProfileAdmin from '../page/admin/ProfileAdmin'
 // import FromProductDetail from '../page/FromProductDetail'
 
 
@@ -56,9 +57,9 @@ const router = createBrowserRouter([
             { path: "editProduct/:id", element: <FromEditProduct /> },
             { path: "order", element: <AdminOrder /> },
             { path: "category", element: <Category /> },
-            { path: "status-payment", element: <FromStatusPayment /> },
+            { path: "status-payment/:id", element: <FromStatusPayment /> },
             { path: "product/:id", element: <FromProductDetailAdmin/> },
-
+            { path: "profile-admin", element: <ProfileAdmin /> },
 
         ]
     },

@@ -64,7 +64,7 @@ const FromEditProduct = () => {
         data.append('name', product.name);
         data.append('detail', product.detail);
         data.append('price', product.price);
-        data.append('categoryId', product.categoryId);
+        // data.append('categoryId', product.categoryId);
 
         if(product.image) {
             data.append('image', product.image);
@@ -134,7 +134,7 @@ const FromEditProduct = () => {
                         
                     />
                 </div>
-                <div className='m-5'>
+                {/* <div className='m-5'>
                     <label><b>Category:</b></label>
                     <input
                         type="text"
@@ -143,7 +143,7 @@ const FromEditProduct = () => {
                         onChange={handleChange}
                         
                     />
-                </div >
+                </div > */}
                 <div className=' m-5'>
                     <label><b>Detail:</b></label>
                     <textarea

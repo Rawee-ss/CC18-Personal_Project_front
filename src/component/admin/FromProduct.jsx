@@ -4,7 +4,7 @@ import { creatProducts, deleteProduct } from '../../api/ProductsApi'
 import UploadProduct from './FromCreateProduct'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAccessToken } from '../../untils/LocalStorage'
-
+import { Pencil, Trash2 } from 'lucide-react';
 
 
 const initialState = {
@@ -15,8 +15,8 @@ const initialState = {
     image: []
 }
 const FormProduct = () => {
-    const { token, getCategory, categories, getProduct, products ,
-        setEditValue} = useAuth()
+    const { token, getCategory, categories, getProduct, products,
+        setEditValue } = useAuth()
     const [form, setForm] = useState(initialState)
     const [productsItem, setProductsItem] = useState([])
     const navigate = useNavigate()
@@ -63,8 +63,8 @@ const FormProduct = () => {
         setEditValue(item)
         navigate('/admin/editProduct/' + item.id)
     }
-console.log("object")
-const showProduct = products.filter(item => !item.isDelete)
+    console.log("object")
+    const showProduct = products.filter(item => !item.isDelete)
 
     return (
         <div>
@@ -78,8 +78,8 @@ const showProduct = products.filter(item => !item.isDelete)
                         <th scope="col">Product Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Manage</th>
+                        {/* <th scope="col">Category</th> */}
+                        <th scope="col" >Manage</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,21 +106,18 @@ const showProduct = products.filter(item => !item.isDelete)
                                     <td>{item.name}</td>
                                     <td>{item.detail}</td>
                                     <td>{item.price}</td>
-                                    <td>{item.categoryId}</td>
-                                    <td className='flex gap-2 justify-center items-center'>
-                                        <p className='flex justify-center items-center bg-yellow-500 rounded-md p-1 hover:scale-105'>
-                                            <div onClick={()=>handleEdit(item)}  >
-                                                {/* <Pencil /> */}Edit
-                                            </div>
-                                        </p>
+                                    {/* <td>{item.categoryId}</td> */}
+                                    <td>
+                                        <button onClick={() => handleEdit(item)}
+                                            className='text-white mr-2 bg-yellow-500 rounded-md p-1 hover:scale-105'>
+                                            <Pencil />
+                                        </button>
 
-                                        <p
-                                            className='bg-red-500 rounded-md p-1 shadow-md hover:scale-105 '
+                                        <button
+                                            className='bg-red-500 rounded-md p-1 shadow-md hover:scale-105 text-white '
                                             onClick={() => handleDelete(item.id)}>
-                                            {/* <Trash /> */}
-                                            Delete
-
-                                        </p>
+                                            <Trash2 />
+                                        </button>
 
                                     </td>
                                 </tr>

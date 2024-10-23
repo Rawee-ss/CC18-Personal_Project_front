@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import { IoFileTrayOutline } from "react-icons/io5";
 import { FaRegFolder } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
-import { LogOut, CircleUserRound, Archive } from 'lucide-react';
+import { LogOut, CircleUserRound, Archive ,Folder} from 'lucide-react';
 
 export default function UserSidebar() {
   const [isShow, setIsShow] = useState(false)
@@ -28,7 +28,7 @@ export default function UserSidebar() {
             <li className='my-1 text-xl'><Link to={"/user/profile"}><CircleUserRound />Profile</Link></li>
             <li className='my-1 text-xl'><Link to={"/user/store"}><Archive />Store</Link></li>
             {/* <li className='my-1 text-xl'><Link to={"/user/favorite"}><FaRegHeart />Favorite</Link></li> */}
-            <li className='my-1 text-xl'><Link to={"/user/order"}><FaRegFolder />Order</Link></li>
+            <li className='my-1 text-xl'><Link to={"/user/order"}><Folder />Order</Link></li>
           </div>
 
           <div onClick={hdlLogout} className='flex justify-center items-center rounded-md p-2 hover:bg-blue-900 hover:text-white hover:duration-200 active:bg-green-400 '>

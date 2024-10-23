@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { getAccessToken, removeAccessToken, setAccessToken } from '../untils/LocalStorage';
 import { getAllCategory } from '../api/CategoryApi';
 import { getProducts } from '../api/ProductsApi';
-import { getOrderApi } from '../api/OrderApi';
+import { getAllOrderApi, getOrderApi } from '../api/OrderApi';
 import { updateUserProfile } from '../api/UserProfileApi';
 
 const AuthContext = createContext();
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [order, setOrder] = useState([]);
     const [dataUser, setDataUser] = useState(null);
-    const [editValue,setEditValue ] = useState({})
+    const [editValue, setEditValue] = useState({})
 
 
     const fetchUserData = async () => {
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
             setUser(resp.data.user);
             setToken(resp.data.token);
             setAccessToken(resp.data.token);
-            localStorage.setItem("user",JSON.stringify(resp.data.user))
+            localStorage.setItem("user", JSON.stringify(resp.data.user))
             return resp.data.user.role;
         } catch (err) {
             toast.error('Login failed. Please try again.');
@@ -113,17 +113,30 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const getAllOrder = async () => {
+        try {
+            const res = await getAllOrderApi();
+            setOrder(res.data.getAllOrder);
+            console.log(res.data.getAllOrder)
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <AuthContext.Provider
             value={{
                 editValue,
                 setEditValue,
-                 user, 
-                 role, 
-                 token, 
-                 categories, 
-                 products, actionRegister, actionLogin, dataUser, actionLogout, getCategory, getProduct,
-                fetchUserData, getOrder, order, updateProfile }}
+                user,
+                role,
+                token,
+                categories,
+                products, 
+                actionRegister, actionLogin,
+                dataUser, actionLogout, getCategory, getProduct,
+                fetchUserData, getOrder, order, updateProfile, getAllOrder
+            }}
         >
             {children}
         </AuthContext.Provider>

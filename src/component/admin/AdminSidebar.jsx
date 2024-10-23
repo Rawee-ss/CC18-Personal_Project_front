@@ -4,6 +4,10 @@ import { useAuth } from '../../context/AuthContext'
 import { SlLogout } from "react-icons/sl";
 import { IoFileTrayOutline } from "react-icons/io5";
 import { FaRegFolder } from "react-icons/fa";
+import { LogOut } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
+import { LayoutDashboard, Folder, Gamepad, CircleUserRound } from 'lucide-react';
+
 
 export default function AdminSidebar() {
 
@@ -27,15 +31,17 @@ export default function AdminSidebar() {
         <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex justify-between">
           <div>
-          <div className='text-2xl'><b>Profile</b></div>
-          <li className='my-1 text-xl'><Link to={"/admin/category"}><IoFileTrayOutline /> Category</Link></li>
-          <li className='my-1 text-xl'><Link to={"/admin/products"}><IoFileTrayOutline /> Products</Link></li>
-          <li className='my-1 text-xl'><Link to={"/admin/order"}><FaRegFolder />Order</Link></li>
+            <div className='text-2xl'><b>Profile</b></div>
+            {/* <li className='my-1 text-xl'><Link to={"/admin/category"}> <LayoutDashboard /> Category</Link></li> */}
+            <li className='my-1 text-xl'><Link to={"/admin/profile-admin"}><CircleUserRound /> Profile</Link></li>
+            <li className='my-1 text-xl'><Link to={"/admin/products"}><Gamepad /> Products</Link></li>
+            <li className='my-1 text-xl'><Link to={"/admin/order"}><Folder />Order</Link></li>
           </div>
 
-          <div>
-          <li onClick={hdlLogout} className="text-xl cursor-pointer flex justify-center rounded-md h-10 w-80 hover:bg-blue-900 hover:text-white hover:duration-200 active:bg-green-400">
-          <b>Logout</b> </li>
+          <div onClick={hdlLogout} className='flex justify-center items-center rounded-md p-2 hover:bg-blue-900 hover:text-white hover:duration-200 active:bg-green-400 '>
+            <LogOut />
+            <li className="ml-2 text-xl cursor-pointer flex justify-center  h-10 w-80">
+              Logout </li>
           </div>
 
         </ul>
