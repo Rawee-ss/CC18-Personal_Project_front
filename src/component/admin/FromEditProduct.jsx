@@ -99,7 +99,7 @@ const FromEditProduct = () => {
                         name="name"
                         value={product?.name}
                         onChange={handleChange}
-                        required
+                        
                     />
                 </div>
                 <div className='m-5 ' >
@@ -131,7 +131,7 @@ const FromEditProduct = () => {
                         name="price"
                         value={product?.price}
                         onChange={handleChange}
-                        required
+                        
                     />
                 </div>
                 <div className='m-5'>
@@ -141,7 +141,7 @@ const FromEditProduct = () => {
                         name="categoryId"
                         value={product?.categoryId}
                         onChange={handleChange}
-                        required
+                        
                     />
                 </div >
                 <div className=' m-5'>
@@ -152,7 +152,7 @@ const FromEditProduct = () => {
                         type="text"
                         value={product?.detail}
                         onChange={handleChange}
-                        required
+                        
                     />
                 </div>
                 <div className='flex justify-center  m-5'>

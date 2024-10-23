@@ -22,9 +22,13 @@ import FromEditProduct from '../component/admin/FromEditProduct'
 import Dashboard from '../page/admin/Dashboard'
 import FromPayment from '../component/user/FromPayment'
 import FromBill from '../component/user/FromBill'
-import FromProductDetail from '../component/user/FromProductDetail'
 import FromStatusPayment from '../component/admin/FromStatusPayment'
 import FromStore from '../component/user/FromStore'
+import FromProductDetailUser from '../component/user/FromProductDetailUser'
+import FromProductDetailAdmin from '../component/admin/FromProductDetailAdmin'
+import HomeAdmin from '../page/admin/HomeAdmin'
+import HomeUser from '../page/user/HomeUser'
+// import FromProductDetail from '../page/FromProductDetail'
 
 
 const router = createBrowserRouter([
@@ -37,7 +41,8 @@ const router = createBrowserRouter([
             { path: "register", element: <Register /> },
             { path: "login", element: <Login /> },
             { path: "unauthorization", element: <Unauthorization /> },
-            { path: "*", element: <PageNotFound /> }
+            { path: "*", element: <PageNotFound /> },
+            // { path: "product/:id", element: <FromProductDetail/> },
         ]
     },
 
@@ -45,13 +50,15 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <ProtectRoute element={<AdminLayout />} allow={["ADMIN"]} />,
         children: [
-            { index: true, element: <Home /> },
+            { index: true, element: <HomeAdmin /> },
             { path: "products", element: <Products /> },
             { path: "createProduct", element: <UploadProduct /> },
             { path: "editProduct/:id", element: <FromEditProduct /> },
             { path: "order", element: <AdminOrder /> },
             { path: "category", element: <Category /> },
             { path: "status-payment", element: <FromStatusPayment /> },
+            { path: "product/:id", element: <FromProductDetailAdmin/> },
+
 
         ]
     },
@@ -59,7 +66,7 @@ const router = createBrowserRouter([
         path: "/user",
         element: <ProtectRoute element={<UserLayout />} allow={["USER"]} />,
         children: [
-            { index: true, element: <Home /> },
+            { index: true, element: <HomeUser /> },
             { path: "cart", element: <CartUser /> },
             { path: "order", element: <OrderUser /> },
             { path: "profile", element: <ProfileUser /> },
@@ -68,7 +75,7 @@ const router = createBrowserRouter([
             { path: "category", element: <Category /> },
             { path: "payment", element: <FromPayment /> },
             { path: "bill", element: <FromBill /> },
-            { path: "product/:id", element: <FromProductDetail/> },
+            { path: "products/:id", element: <FromProductDetailUser/> },
             { path: "store-product", element: <FromStore/> },
             
 

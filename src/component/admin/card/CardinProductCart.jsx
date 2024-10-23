@@ -4,41 +4,48 @@ import { deleteItemCart, getCart } from '../../../api/CartApi';
 import { getAccessToken } from '../../../untils/LocalStorage';
 
 
-const CardinProductCart = ({ setTotal }) => {
-    const [cart, setCart] = useState([])
+const CardinProductCart = ({ setTotal,setCartItems }) => {
+   
+
+    const [cart, setCart] = useState([]);
+
     useEffect(() => {
         const fetchCart = async () => {
-            const token = getAccessToken()
-            const resp = await getCart(token)
-            console.log(resp.data.cartItem)
-            setCart(resp.data.cartItem)
-        }
-        fetchCart()
-    }, [])
+            const token = getAccessToken();
+            const resp = await getCart(token);
+            // console.log(resp.data.cartItem);
+            setCart(resp.data.cartItem);
+            setCartItems(resp.data.cartItem)
 
+            const totalPrice = resp.data.cartItem.reduce((acc, el) => {
+                return acc + el.price;
+            }, 0);
 
+            setTotal(totalPrice);
+        };
 
+        fetchCart();
+    }, []); 
 
-    const totalPrice = cart.reduce((acc, el) => {
-        return acc + el.price
-    }, 0)
-    
-    setTotal(totalPrice)
-
-
-    // const hdlDeleteItem = ()
     const hdlDeleteItem = async (itemId) => {
         try {
             const token = getAccessToken();
-            // console.log(token)
-            await deleteItemCart(token, itemId); 
-            setCart(prevCart => prevCart.filter(item => item.id !== itemId)); 
-            // console.log(item.id)
+            await deleteItemCart(token, itemId);
+            setCart(prevCart => {
+                const updatedCart = prevCart.filter(item => item.id !== itemId);
+
+                const newTotalPrice = updatedCart.reduce((acc, el) => {
+                    return acc + el.price;
+                }, 0);
+
+                setTotal(newTotalPrice); 
+
+                return updatedCart;
+            });
         } catch (error) {
             console.error("Failed to delete item:", error);
         }
     };
-
 
     return (
         <div className="flex flex-col justify-between p-8">
@@ -47,9 +54,7 @@ const CardinProductCart = ({ setTotal }) => {
                 <div key={index} className="w-full">
 
                     <div className="flex h-36 items-center ml-10 p-4 rounded-lg mb-4 shadow-md bg-slate-50">
-                        {/* <input
-                            type="checkbox"
-                            className="mr-4" /> */}
+                       
 
                         <img className="w-24 h-24 rounded-lg object-cover"
                             src={item.products.image}

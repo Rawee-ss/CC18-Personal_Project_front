@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { getProducts } from '../api/ProductsApi'
-import CardProduct from './CardProduct'
+import { useEffect, useState } from "react"
+import { getProducts } from "../../api/ProductsApi"
+import CardProductAdmin from "../../component/admin/card/CardProductAdmin"
 
 
 
 
-export default function Home() {
+export default function HomeAdmin() {
   const [products, setProducts] = useState([])
 
   const getAllProduct = async () => {
     const res = await getProducts()
-    console.log(res)
+    // console.log(res)
     setProducts(res.data.products)
   }
 
@@ -26,7 +26,7 @@ export default function Home() {
           {
             products.map((item, index) =>
         
-              <CardProduct key={index} item={item} />
+              <CardProductAdmin key={index} item={item} />
          
             )
           }

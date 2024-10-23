@@ -17,8 +17,6 @@ export const AuthProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [order, setOrder] = useState([]);
     const [dataUser, setDataUser] = useState(null);
-
-
     const [editValue,setEditValue ] = useState({})
 
 
@@ -124,7 +122,8 @@ export const AuthProvider = ({ children }) => {
                  role, 
                  token, 
                  categories, 
-                 products, actionRegister, actionLogin, dataUser, actionLogout, getCategory, getProduct, fetchUserData, getOrder, order, updateProfile }}
+                 products, actionRegister, actionLogin, dataUser, actionLogout, getCategory, getProduct,
+                fetchUserData, getOrder, order, updateProfile }}
         >
             {children}
         </AuthContext.Provider>

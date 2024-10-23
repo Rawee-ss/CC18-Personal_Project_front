@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { getProducts } from '../api/ProductsApi'
-import CardProduct from './CardProduct'
+import { Link } from 'react-router-dom'
+import CardProductUser from '../../component/user/cartUser/CardProductUser'
+import { getProducts } from '../../api/ProductsApi'
 
 
 
 
-export default function Home() {
+export default function HomeUser() {
   const [products, setProducts] = useState([])
 
   const getAllProduct = async () => {
@@ -26,7 +27,7 @@ export default function Home() {
           {
             products.map((item, index) =>
         
-              <CardProduct key={index} item={item} />
+              <CardProductUser key={index} item={item} />
          
             )
           }

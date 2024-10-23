@@ -5,20 +5,8 @@ import { getAccessToken } from '../../../untils/LocalStorage'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-const CardProduct = ({ item }) => {
+const CardProductAdmin = ({ item }) => {
     console.log(item)
-
-    const addtoCart = async () => {
-        const token = getAccessToken()
-        try {
-            const resp = await createCart(token, item.id)
-            toast.success("Added to cart successfully!")
-
-        } catch (err) {
-            console.log(err)
-            toast.error("Failed to add to cart.")
-        }
-    }
 
     return (
 
@@ -38,15 +26,14 @@ const CardProduct = ({ item }) => {
 
 
             <div className='py-2'>
-                <Link to={`/user/product/${item.id}`}>
+                <Link to={`/admin/product/${item.id}`}>
                     <p className='text-xl text-blue-900 hover:text-blue-600'>{item.name}</p>
                 </Link>
             </div>
 
 
-            <div className='flex justify-between items-center '>
+            <div className='flex justify-end items-center '>
                 <span className='text-sm font-bold text-blue-900'>฿ {item.price}</span>
-                <button className='bg-blue-900 rounded-md p-2 text-white hover:bg-blue-700 shadow-md ' onClick={addtoCart}><ShoppingCart /></button>
             </div>
 
         </div>
@@ -55,4 +42,4 @@ const CardProduct = ({ item }) => {
     )
 }
 
-export default CardProduct
+export default CardProductAdmin

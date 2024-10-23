@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { getAccessToken } from '../../untils/LocalStorage';
-import { createCart } from '../../api/CartApi';
-import { toast } from 'react-toastify';
-import { getProductDetail, getProducts } from '../../api/ProductsApi';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getAccessToken } from "../../untils/LocalStorage";
+import { createCart } from "../../api/CartApi";
+import { toast } from "react-toastify";
+import { getProductDetail } from "../../api/ProductsApi";
 
-const FromProductDetail = ({ item }) => {
+const FromProductDetailUser = ({ item }) => {
   console.log(item)
   const [product, setProduct] = useState([])
   const { id } = useParams()
@@ -46,7 +46,7 @@ const FromProductDetail = ({ item }) => {
 
         <h1 className="text-2xl font-bold text-blue-900 mb-4">{product.name}</h1>
 
-        <img className=" rounded-md mb-4 bg-slate-200 h-[50vh] w-[60vw]" src={`${product.image}`}/>
+        <img className=" rounded-md mb-4 bg-slate-200 h-[50vh] w-[60vw]" src={`${product.image}`} />
 
         <div className="w-full flex justify-end items-center mb-4 ">
           <Link to={"/user"}>
@@ -70,4 +70,4 @@ const FromProductDetail = ({ item }) => {
   );
 };
 
-export default FromProductDetail;
+export default FromProductDetailUser

@@ -1,17 +1,39 @@
 import React, { useState } from 'react'
 import CardinProductCart from '../../component/admin/card/CardinProductCart'
-import { Link } from 'react-router-dom'
-// import { Link } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+
 
 export default function CartUser() {
   const [total, setTotal] = useState(null)
+  const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate()
+
   const totalPrice = (total) => {
+    // console.log(total)
     setTotal(total)
   }
 
-  // const hdlSubmit = () => {
+  const hdlCartItem = (item) => {
+    // console.log(item)
+    setCartItems(item)
+  }
 
-  // }
+  const hdlSubmit = () => {
+    if (cartItems.length === 0) {
+    toast.error("No items in the cart, Please add products.")
+    }
+    navigate("/user/payment")
+    toast.success("Create order successfully.")
+  }
+
+  const removeItemFromCart = (itemId) => {
+    const updatedCartItems = cartItems.filter(item => item.id !== itemId);
+    setCartItems(updatedCartItems); // อัปเดตรายการสินค้า
+    if (updatedCartItems.length === 0) {
+      setTotal(0); // ถ้าไม่มีสินค้าแล้ว ให้ราคา total เป็น 0
+    }
+  };
 
   return (
     <div >
@@ -20,7 +42,7 @@ export default function CartUser() {
 
         <div className='w-1/2 p-4 h-screen overflow-y-auto'>
 
-          <CardinProductCart setTotal={totalPrice} />
+          <CardinProductCart setTotal={totalPrice} setCartItems={hdlCartItem} removeItemFromCart={removeItemFromCart} />
 
         </div>
 
@@ -43,17 +65,23 @@ export default function CartUser() {
               <h1 className="text-blue-900"><b>฿ {total}</b></h1>
             </div>
             <div className='flex justify-center '>
-              <Link to={"/user/payment"}>
-                <button className='bg-blue-900 p-2 rounded-md text-white m-8 hover:bg-blue-700'>Confirm order</button>
-              </Link>
-
-            </div>
+              {cartItems.length > 0 && total > 0 ? (
+               
+                  <button onClick={hdlSubmit} className='bg-blue-900 p-2 rounded-md text-white m-8 hover:bg-blue-700'>
+                    Confirm order
+                  </button>
+                
+              ) : (
+                <button disabled className='bg-gray-500 p-2 rounded-md text-white m-8'>
+                  No items in cart
+                </button>
+              )}</div>
 
 
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 
 }

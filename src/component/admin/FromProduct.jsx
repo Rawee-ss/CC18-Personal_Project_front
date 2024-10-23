@@ -16,7 +16,7 @@ const initialState = {
 }
 const FormProduct = () => {
     const { token, getCategory, categories, getProduct, products ,
-        setEditValue,} = useAuth()
+        setEditValue} = useAuth()
     const [form, setForm] = useState(initialState)
     const [productsItem, setProductsItem] = useState([])
     const navigate = useNavigate()
@@ -65,6 +65,7 @@ const FormProduct = () => {
     }
 console.log("object")
 const showProduct = products.filter(item => !item.isDelete)
+
     return (
         <div>
             <hr />
