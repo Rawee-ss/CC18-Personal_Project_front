@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { getAccessToken, removeAccessToken, setAccessToken } from '../untils/LocalStorage';
 import { getAllCategory } from '../api/CategoryApi';
 import { getProducts } from '../api/ProductsApi';
-import { getAllOrderApi, getOrderApi } from '../api/OrderApi';
+import { getAllOrderApi, getItemOrder, getOrderApi } from '../api/OrderApi';
 import { updateUserProfile } from '../api/UserProfileApi';
 
 const AuthContext = createContext();
@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     const [order, setOrder] = useState([]);
     const [dataUser, setDataUser] = useState(null);
     const [editValue, setEditValue] = useState({})
+    const [itemOrder, setItemOrder] = useState([]);
 
 
     const fetchUserData = async () => {
@@ -122,6 +123,7 @@ export const AuthProvider = ({ children }) => {
             console.log(err);
         }
     };
+
 
     return (
         <AuthContext.Provider

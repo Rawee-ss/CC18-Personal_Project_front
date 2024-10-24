@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { getAllOrderApi, getItemOrder, saveOrder } from '../../api/OrderApi';
+import { getAllOrderApi, getItemOrder, saveOrder, updateOrderStatus } from '../../api/OrderApi';
 import { getAccessToken } from '../../untils/LocalStorage';
 import { getCart } from '../../api/CartApi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const FromStatusPayment = () => {
@@ -19,8 +19,10 @@ const FromStatusPayment = () => {
 
     const data = new FormData()
     data.append("paymentStatus", paymentStatus)
+    data.append("ordersId",orderId)
+    console.log(orderId)
     try {
-      await saveOrder(data)
+      await updateOrderStatus(data,id)
       navigate("/admin/order")
       toast.success("Update success")
     } catch (err) {
@@ -28,22 +30,29 @@ const FromStatusPayment = () => {
     }
   }
 
+
+  const { id } = useParams();
+
+  const fetchOrderItem = async (id) => {
+
+    const token = getAccessToken()
+    const resp = await getItemOrder(id)
+    console.log(resp.data)
+    setOrder(resp.data.orderItem)
+    // console.log(resp.data.ordersId)
+    setOrderId(resp.data.ordersId)
+    // console.log(resp.data.paymentStatus)
+    setPaymentStatus(resp.data.paymentStatus)
+    // console.log(resp.data.totalPrice)
+    setTotalPrice(resp.data.totalPrice)
+    // console.log(resp.data.slip)
+    setSlip(resp.data.slip)
+  }
+
   useEffect(() => {
-    const fetchOrder = async () => {
-      const token = getAccessToken()
-      const resp = await getItemOrder()
-      // console.log(resp.data)
-      setOrder(resp.data.orderItem)
-      // console.log(resp.data.ordersId)
-      setOrderId(resp.data.orderId)
-      // console.log(resp.data.paymentStatus)
-      setPaymentStatus(resp.data.paymentStatus)
-      // console.log(resp.data.totalPrice)
-      setTotalPrice(resp.data.totalPrice)
-      // console.log(resp.data.slip)
-      setSlip(resp.data.slip)
-    }
-    fetchOrder()
+
+    fetchOrderItem(id);
+
   }, [])
   console.log(order)
   console.log(paymentStatus)
@@ -58,7 +67,7 @@ const FromStatusPayment = () => {
 
           {order.map((item) =>
             <div key={item.id}>
-              <h2 className="text-l font-semibold "> No. {item.ordersId}</h2>
+              <h2 className="text-l font-semibold "> No. {item.id}</h2>
               <div  >
                 < div className="space-y-4 my-3" >
                   <div className="flex items-center justify-between" >

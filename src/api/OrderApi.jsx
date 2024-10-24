@@ -6,8 +6,8 @@ export const saveOrder = (form) => {
     return axios.patch("/order", form)
 }
 
-export const updateOrderStatus = (form) => {
-    return axios.patch("/order/update-status/:id", form)
+export const updateOrderStatus = (data, id) => {
+    return axios.patch("/order/update-status/" + id, data)
 }
 
 export const getOrderApi = () => {
@@ -18,8 +18,8 @@ export const getAllOrderApi = () => {
     return axios.get("/order/all")
 }
 
-export const getItemOrder = () => {
-    return axios.get("/order/update-status")
+export const getItemOrder = (id) => {
+    return axios.get("/order/update-status/" + id)
 }
 
 export const paymentStatus = () => {

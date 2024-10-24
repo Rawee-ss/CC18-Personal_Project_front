@@ -39,7 +39,7 @@ export default function AdminOrder() {
             </div>
             <div className="text-right flex-1 ">
               <p className="text-sm text-gray-500 mr-5 mb-2">Date: {new Date(item.updatedAt).toLocaleDateString("en-GB")}</p>
-              <Link to={`/admin/status-payment/${item.id}`}>
+              <Link to={`/admin/order/status-payment/${item.id}`}>
                 <button className="text-blue-900 hover:text-blue-600 w-10 h-10"><ChevronRight /></button>
               </Link>
               <p className='text-green-500 mr-5'>Status: {item.paymentStatus}</p>

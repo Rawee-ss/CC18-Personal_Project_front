@@ -11,16 +11,7 @@ const FromProductDetailAdmin = ({ item }) => {
   const { id } = useParams()
 
 
-  const addtoCart = async () => {
-    const token = getAccessToken()
-    try {
-      const resp = await createCart(token, item.id)
-      toast.success("Added to cart successfully!")
-    } catch (err) {
-      console.log(err)
-      toast.error("Failed to add to cart.")
-    }
-  }
+ 
 
 
   const findProduct = async () => {
