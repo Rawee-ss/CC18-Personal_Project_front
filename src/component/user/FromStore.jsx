@@ -30,7 +30,6 @@ const FromStore = () => {
       console.log("resp", resp)
       setGetItem(resp.data)
       console.log('getItem?.status', getItem?.status)
-      setStatus("UNINSTALL")
 
       if(resp.data.status === "INSTALL") {
         setStatus("UNINSTALL")
