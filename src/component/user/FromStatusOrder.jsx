@@ -8,44 +8,16 @@ import { getAccessToken } from "../../untils/LocalStorage"
 const FromStatusOrder = () => {
   const [paymentStatus, setPaymentStatus] = useState('PENDING')
   const [order, setOrder] = useState([])
-  const [orderId, setOrderId] = useState(null)
   const [totalPrice, setTotalPrice] = useState([])
   const [slip, setSlip] = useState()
-  const navigate = useNavigate()
-
-
-  // const hdlSaveOrder = async () => {
-  //   console.log("click")
-
-  //   const data = new FormData()
-  //   data.append("paymentStatus", paymentStatus)
-  //   data.append("ordersId", orderId)
-  //   console.log(orderId)
-  //   try {
-  //     await updateOrderStatus(data, id)
-  //     navigate("/admin/order")
-  //     toast.success("Update success")
-  //   } catch (err) {
-  //     toast.error("Recording failed")
-  //   }
-  // }
-
-
   const { id } = useParams();
 
   const fetchOrderItem = async (id) => {
 
-    const token = getAccessToken()
     const resp = await getItemOrder(id)
-    console.log(resp.data)
     setOrder(resp.data.orderItem)
-    // console.log(resp.data.ordersId)
-    setOrderId(resp.data.ordersId)
-    // console.log(resp.data.paymentStatus)
     setPaymentStatus(resp.data.paymentStatus)
-    // console.log(resp.data.totalPrice)
     setTotalPrice(resp.data.totalPrice)
-    // console.log(resp.data.slip)
     setSlip(resp.data.slip)
   }
 
@@ -54,9 +26,6 @@ const FromStatusOrder = () => {
     fetchOrderItem(id);
 
   }, [])
-  console.log(order)
-  console.log(paymentStatus)
-  console.log(totalPrice)
 
   return (
     <div >
@@ -121,14 +90,14 @@ const FromStatusOrder = () => {
           </div>
 
           <div className="flex justify-center items-center ">
-        <Link to={"/user/order"}>
-        <button className="bg-blue-900 rounded-md text-white font-semibold w-16 h-10 hover:bg-blue-700">Order</button>
-        </Link>
-      </div>
-         
+            <Link to={"/order"}>
+              <button className="bg-blue-900 rounded-md text-white font-semibold w-16 h-10 hover:bg-blue-700">Order</button>
+            </Link>
+          </div>
+
         </div >
       </div >
-     
+
     </div >
   )
 }

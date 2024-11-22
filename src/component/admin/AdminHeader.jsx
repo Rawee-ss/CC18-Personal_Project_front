@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from '../../context/AuthContext'
 import AdminSidebar from './AdminSidebar'
 import QuegosLogo from "../../image/QuegosLogo.png"
 
@@ -25,18 +24,18 @@ const AdminHeader = () => {
       </a> */}
         {/* <div className='flex w-full justify-between'>
           <ul className=' flex items-center gap-4'> */}
-            {/* <li><Link to={"/admin"}>HOME</Link></li> */}
-            {/* <li><Link to={"/admin/category"}>CATEGORY</Link></li>
+        {/* <li><Link to={"/admin"}>HOME</Link></li> */}
+        {/* <li><Link to={"/admin/category"}>CATEGORY</Link></li>
           </ul> */}
 
-          <div>
-            <ul className='flex gap-4 m-10'>
-              {/* <li><Link to={"/login"}>LOGIN</Link></li> */}
-              <AdminSidebar />
-            </ul>
-          </div>
+        <div>
+          <ul className='flex gap-4 m-10'>
+            {/* <li><Link to={"/login"}>LOGIN</Link></li> */}
+            <AdminSidebar />
+          </ul>
         </div>
       </div>
+    </div>
     // </div>
   )
 }

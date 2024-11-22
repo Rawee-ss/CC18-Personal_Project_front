@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getProducts } from '../api/ProductsApi'
 import CardProduct from './CardProduct'
+import { useAuth } from '../context/AuthContext'
 
 
 
@@ -8,9 +9,12 @@ import CardProduct from './CardProduct'
 export default function Home() {
   const [products, setProducts] = useState([])
 
+  const { role } = useAuth()
+  console.log(role, "ROLE")
+
+
   const getAllProduct = async () => {
     const res = await getProducts()
-    console.log(res)
     setProducts(res.data.products)
   }
 
@@ -25,9 +29,9 @@ export default function Home() {
         <div className='flex flex-wrap gap-4 m-10'>
           {
             products.map((item, index) =>
-        
-              <CardProduct key={index} item={item} />
-         
+
+              <CardProduct key={index} item={item} role={role} />
+
             )
           }
 

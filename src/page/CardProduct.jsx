@@ -4,11 +4,10 @@ import { getAccessToken } from '../untils/LocalStorage'
 import { createCart } from '../api/CartApi'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 
-const CardProduct = ({ item }) => {
-    console.log(item)
-    const navigate = useNavigate()
+const CardProduct = ({ item, role }) => {
 
     const addtoCart = async () => {
         const token = getAccessToken()
@@ -19,7 +18,6 @@ const CardProduct = ({ item }) => {
         } catch (err) {
             console.log(err)
             toast.error("Failed to add to cart.")
-            navigate("/login")
         }
     }
 
@@ -41,16 +39,17 @@ const CardProduct = ({ item }) => {
 
 
             <div className='py-2'>
-                <Link to={"/login"}>
+                <Link to={`/products/${item.id}`}>
                     <p className='text-xl text-blue-900 hover:text-blue-600'>{item.name}</p>
                 </Link>
+
+
             </div>
 
 
             <div className='flex justify-between items-center '>
                 <span className='text-sm font-bold text-blue-900'>฿ {item.price}</span>
-                <button className='bg-blue-900 rounded-md p-2 text-white hover:bg-blue-700 shadow-md ' onClick={addtoCart}><ShoppingCart /></button>
-
+                {role !== "ADMIN" ? <button className='bg-blue-900 rounded-md p-2 text-white hover:bg-blue-700 shadow-md ' onClick={addtoCart}><ShoppingCart /></button> : ""}
             </div>
 
         </div>

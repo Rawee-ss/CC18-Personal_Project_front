@@ -38,22 +38,24 @@ export default function StoreUser() {
         </div> */}
 
         {orderComplete.map((item) => (
-          <div key={item.id}>
-          { item.orderItem.map(el => (
-             <div key={el.id} className=" hover:scale-105 m-3 flex h-48 justify-center items-center p-4 rounded-lg shadow-md bg-slate-50 border w-[50vw] ">
-             <img src={el.products.image} className="ml-10 w-48 h-40 rounded-lg object-cover" />
-             <div className="ml-4 flex-1">
-               <h2 className="text-xl font-semibold mb-5 text-blue-900">{el.products.name}</h2>
-             </div>
-             <div className="text-right flex-1 ">
-               <Link to={`/user/store-product/${el.productsId}`}>
-                 <button className="text-blue-900 hover:text-blue-600 w-10 h-10"><ChevronRight /></button>
-               </Link>
-             </div>
- 
-           </div>
-          ))}</div>
-         
+          // <div key={item.id}>
+          <>
+            {item.orderItem.map(el => (
+              <Link to={`/store-product/${el.productsId}`}>
+                <div key={el.id} className=" hover:scale-105 m-3 flex h-48 justify-center items-center p-4 rounded-lg shadow-md bg-slate-50 border w-[50vw] ">
+                  <img src={el.products.image} className="ml-10 w-48 h-40 rounded-lg object-cover" />
+                  <div className="ml-4 flex-1">
+                    <h2 className="text-xl font-semibold mb-5 text-blue-900">{el.products.name}</h2>
+                  </div>
+                  <div className="text-right flex-1 ">
+                    <button className="text-blue-900 hover:text-blue-600 w-10 h-10"><ChevronRight /></button>
+                  </div>
+
+                </div>
+              </Link>
+            ))}
+          </>
+          // </div>
         ))}
       </div>
     </div>)

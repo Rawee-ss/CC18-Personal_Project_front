@@ -13,7 +13,7 @@ export default function Login() {
     const [form, setForm] = useState({
         userName: "",
         password: "",
-       
+
     })
     const [formErrors, setFormErrors] = useState({})
 
@@ -41,7 +41,7 @@ export default function Login() {
         if (role === "ADMIN") {
             navigate("/admin")
         } else {
-            navigate("/user")
+            navigate("/")
         }
     }
 

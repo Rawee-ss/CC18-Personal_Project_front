@@ -17,12 +17,13 @@ const FromStatusPayment = () => {
   const hdlSaveOrder = async () => {
     console.log("click")
 
-    const data = new FormData()
-    data.append("paymentStatus", paymentStatus)
-    data.append("ordersId",orderId)
+    const data = {
+      "paymentStatus": paymentStatus,
+      "ordersId": orderId
+    }
     console.log(orderId)
     try {
-      await updateOrderStatus(data,id)
+      await updateOrderStatus(data, id)
       navigate("/admin/order")
       toast.success("Update success")
     } catch (err) {
@@ -34,19 +35,17 @@ const FromStatusPayment = () => {
   const { id } = useParams();
 
   const fetchOrderItem = async (id) => {
-
-    const token = getAccessToken()
-    const resp = await getItemOrder(id)
-    console.log(resp.data)
-    setOrder(resp.data.orderItem)
-    // console.log(resp.data.ordersId)
-    setOrderId(resp.data.ordersId)
-    // console.log(resp.data.paymentStatus)
-    setPaymentStatus(resp.data.paymentStatus)
-    // console.log(resp.data.totalPrice)
-    setTotalPrice(resp.data.totalPrice)
-    // console.log(resp.data.slip)
-    setSlip(resp.data.slip)
+    try {
+      const resp = await getItemOrder(id)
+      console.log(resp.data)
+      setOrder(resp.data.orderItem)
+      setOrderId(resp.data.ordersId)
+      setPaymentStatus(resp.data.paymentStatus)
+      setTotalPrice(resp.data.totalPrice)
+      setSlip(resp.data.slip)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -84,7 +83,6 @@ const FromStatusPayment = () => {
                     </div>
                     <div className="flex items-center">
                       <p className="text-sm font-medium">฿ {item.products.price}</p>
-
                     </div>
                   </div>
                 </div>
@@ -125,6 +123,7 @@ const FromStatusPayment = () => {
               <option value='PENDING'>PENDING</option>
               <option value='COMPLETED'>COMPLETED</option>
               <option value='FAIL'>FAIL</option>
+
             </select>
           </div>
 
@@ -139,7 +138,7 @@ const FromStatusPayment = () => {
             </div>
             {/* <div className="w-full">
               <button className="w-full bg-red-800 text-white py-2 px-4 rounded hover:bg-red-500">
-                Cancle
+                Cancel
               </button>
             </div> */}
           </div>

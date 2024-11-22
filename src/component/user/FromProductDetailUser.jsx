@@ -4,9 +4,11 @@ import { getAccessToken } from "../../untils/LocalStorage";
 import { createCart } from "../../api/CartApi";
 import { toast } from "react-toastify";
 import { getProductDetail } from "../../api/ProductsApi";
+import { useAuth } from "../../context/AuthContext";
 
-const FromProductDetailUser = ({ item }) => {
-  console.log(item)
+const FromProductDetailUser = () => {
+
+  const { role } = useAuth()
   const [product, setProduct] = useState([])
   const { id } = useParams()
 
@@ -14,7 +16,7 @@ const FromProductDetailUser = ({ item }) => {
   const addtoCart = async () => {
     const token = getAccessToken()
     try {
-      const resp = await createCart(token, item.id)
+      const resp = await createCart(token, id)
       toast.success("Added to cart successfully!")
     } catch (err) {
       console.log(err)
@@ -49,9 +51,8 @@ const FromProductDetailUser = ({ item }) => {
         <img className=" rounded-md mb-4 bg-slate-200 h-[50vh] w-[60vw]" src={`${product.image}`} />
 
         <div className="w-full flex justify-end items-center mb-4 ">
-          <Link to={"/user"}>
-            <button className="flex justify-center items-centertext-xl font-semibold text-white hover:bg-green-500 bg-green-600 rounded-sm p-2 h-10 w-auto" onClick={addtoCart}>฿ {product.price}</button>
-          </Link>
+          {/* <Link to={"/"}> */}
+          {role != "ADMIN" ? <button className="flex justify-center items-centertext-xl font-semibold text-white hover:bg-green-500 bg-green-600 rounded-sm p-2 h-10 w-auto" onClick={addtoCart}>฿ {product.price}</button> : ""}          {/* </Link> */}
         </div>
 
         <div >
@@ -63,7 +64,7 @@ const FromProductDetailUser = ({ item }) => {
             {product.detail} </p>
         </div>
       </div>
-      <Link to={"/user"}>
+      <Link to={"/"}>
         <button className='m-10 rounded-md p-2 h-9 w-16 text-white bg-blue-900 flex justify-center items-center hover:bg-blue-800'>Home</button>
       </Link>
     </div>

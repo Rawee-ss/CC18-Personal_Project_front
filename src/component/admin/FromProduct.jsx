@@ -107,7 +107,8 @@ const FormProduct = () => {
                                     <td>{item.detail}</td>
                                     <td>{item.price}</td>
                                     {/* <td>{item.categoryId}</td> */}
-                                    <td>
+                                    <td >
+                                        <div className='flex items-center justify-center'>
                                         <button onClick={() => handleEdit(item)}
                                             className='text-white mr-2 bg-yellow-500 rounded-md p-1 hover:scale-105'>
                                             <Pencil />
@@ -118,6 +119,7 @@ const FormProduct = () => {
                                             onClick={() => handleDelete(item.id)}>
                                             <Trash2 />
                                         </button>
+                                        </div>
 
                                     </td>
                                 </tr>

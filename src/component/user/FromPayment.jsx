@@ -5,6 +5,7 @@ import { saveOrder } from '../../api/OrderApi';
 import { getAccessToken } from '../../untils/LocalStorage';
 import { getCart } from '../../api/CartApi';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -19,16 +20,22 @@ const FromPayment = () => {
   };
 
   const hdlSaveOrder = async () => {
-    console.log("click")
-    console.log("slip, cart,cartId",cartId)
-    console.log(slip)
-    const data = new FormData()
-    data.append("image", slip)
-    data.append("cart", cart)
-    data.append("cartId", cartId)
-    data.append("totalPrice", totalPrice)
-    await saveOrder(data)
-    navigate("/user/order")
+    try {
+      if (!slip) {
+        toast.error("Please upload slip")
+        return
+
+      }
+      const data = new FormData()
+      data.append("image", slip)
+      data.append("cart", cart)
+      data.append("cartId", cartId)
+      data.append("totalPrice", totalPrice)
+      await saveOrder(data)
+      navigate("/order")
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -118,19 +125,19 @@ const FromPayment = () => {
           </div>
 
 
-         
+
           <div className="mt-10 flex ">
             <div className="w-full mx-5">
-              {/* <Link to={"/user/bill"}> */}
-                <button onClick={hdlSaveOrder} className="w-full  bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-700" >
-                  Confirm order
-                </button>
+              {/* <Link to={"/bill"}> */}
+              <button onClick={hdlSaveOrder} className="w-full  bg-blue-900 text-white py-2 px-4 rounded hover:bg-blue-700" >
+                Confirm order
+              </button>
               {/* </Link> */}
             </div>
             <div className="w-full">
-              <Link to={"/user/cart"}>
+              <Link to={"/cart"}>
                 <button className="w-full bg-red-800 text-white py-2 px-4 rounded hover:bg-red-500">
-                  Cancle
+                  Cancel
                 </button>
               </Link>
             </div>

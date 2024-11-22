@@ -15,7 +15,7 @@ const FromBill = () => {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <img
-                                   
+
                                     className="w-16 h-16 rounded-md bg-slate-200"
                                 />
                                 <div className="ml-4">
@@ -37,7 +37,7 @@ const FromBill = () => {
                 </div>
             </div>
             <div className='flex justify-center mt-10'>
-                <Link to={"/user/order"}>
+                <Link to={"/order"}>
                     <button className='bg-blue-900 text-white p-3 rounded-md shadow-md hover:bg-blue-700'>Order</button>
                 </Link>
             </div>

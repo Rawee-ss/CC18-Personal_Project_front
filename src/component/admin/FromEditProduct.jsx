@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { creatProducts, getProductDetail, updateProducts } from '../../api/ProductsApi';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -20,6 +20,8 @@ const FromEditProduct = () => {
     // const [formData, setFormData] = useState({});
     const [product, setProduct] = useState([])
     const navigate = useNavigate()
+
+    const fileRef = useRef()
 
 
     const fetchProduct = async () => {
@@ -66,7 +68,7 @@ const FromEditProduct = () => {
         data.append('price', product.price);
         // data.append('categoryId', product.categoryId);
 
-        if(product.image) {
+        if (product.image) {
             data.append('image', product.image);
         }
 
@@ -99,13 +101,13 @@ const FromEditProduct = () => {
                         name="name"
                         value={product?.name}
                         onChange={handleChange}
-                        
+
                     />
                 </div>
-                <div className='m-5 ' >
+                <div className='m-5 cursor-pointer' onClick={() => fileRef.current.click()}>
                     <img
-                        src={product?.imagePreview  || product?.image} />
-                    <div className='m-5 w-96 h-auto' >
+                        src={product?.imagePreview || product?.image} />
+                    {/* <div className='m-5 w-96 h-auto' >
 
                         {product?.imagePreview && (
                             <img
@@ -115,12 +117,14 @@ const FromEditProduct = () => {
                             />
 
                         )}
-                    </div>
+                    </div> */}
                     <input
                         type="file"
                         name="image"
                         accept="image/*"
+                        ref={fileRef}
                         onChange={handleChange}
+                        className='hidden'
                     />
                 </div>
                 <div className='m-5 bg-slate-100 flex justify-between items-center h-15 p-4 rounded-md'>
@@ -131,7 +135,7 @@ const FromEditProduct = () => {
                         name="price"
                         value={product?.price}
                         onChange={handleChange}
-                        
+
                     />
                 </div>
                 {/* <div className='m-5'>
@@ -152,7 +156,7 @@ const FromEditProduct = () => {
                         type="text"
                         value={product?.detail}
                         onChange={handleChange}
-                        
+
                     />
                 </div>
                 <div className='flex justify-center  m-5'>

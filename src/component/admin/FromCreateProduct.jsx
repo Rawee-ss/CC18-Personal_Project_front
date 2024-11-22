@@ -124,7 +124,7 @@ const UploadProduct = () => {
         </div>
         <div className='flex justify-between m-5'>
           <button className='bg-blue-900 text-white p-1 px-9 rounded ' type="submit">Upload</button>
-          <button className='bg-red-700 text-white p-1 px-9 rounded ' type="submit"><Link to={"/admin/products"}>Cancle</Link></button>
+          <button className='bg-red-700 text-white p-1 px-9 rounded ' type="submit"><Link to={"/admin/products"}>Cancel</Link></button>
         </div>
       </form>
     </div>

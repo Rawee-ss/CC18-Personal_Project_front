@@ -19,20 +19,27 @@ export const AuthProvider = ({ children }) => {
     const [dataUser, setDataUser] = useState(null);
     const [editValue, setEditValue] = useState({})
     const [itemOrder, setItemOrder] = useState([]);
+    const [loading, setLoading] = useState(false)
 
 
     const fetchUserData = async () => {
         const token = getAccessToken();
+        console.log(token, "TOKEN")
         if (token) {
             try {
+                setLoading(true)
                 const resp = await currentUser(token);
+                console.log(resp, "FETCH DATA")
                 setUser(resp.data.member.userName);
                 setDataUser(resp.data.member)
                 setRole(resp.data.member.role);
                 setToken(token)
+                return resp
             } catch (err) {
                 toast.error('Failed to fetch user data. Please log in again.');
                 // actionLogout();
+            } finally {
+                setLoading(false)
             }
 
         }
@@ -56,7 +63,7 @@ export const AuthProvider = ({ children }) => {
         console.log('form====', form)
         try {
             const resp = await updateUserProfile(form);
-            // toast.success('updateProfile success');
+            toast.success('updateProfile success');
         } catch (err) {
             toast.error('try updateProfile again');
         }
@@ -65,12 +72,13 @@ export const AuthProvider = ({ children }) => {
     const actionLogin = async (form) => {
         try {
             const resp = await login(form);
-            // console.log(resp.data.user,"hi jukkru")
+            console.log(resp.data.user, "hi jukkru")
             toast.success('Login success');
             setRole(resp.data.role)
             setUser(resp.data.user);
             setToken(resp.data.token);
             setAccessToken(resp.data.token);
+            setDataUser(resp.data.dataUser)
             localStorage.setItem("user", JSON.stringify(resp.data.user))
             return resp.data.user.role;
         } catch (err) {
@@ -83,6 +91,7 @@ export const AuthProvider = ({ children }) => {
         setRole(null);
         setUser(null);
         setToken(null);
+        setDataUser(null)
     };
 
     const getCategory = async () => {
@@ -124,7 +133,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-
+    console.log(dataUser, 'datauser-context')
     return (
         <AuthContext.Provider
             value={{
@@ -134,10 +143,10 @@ export const AuthProvider = ({ children }) => {
                 role,
                 token,
                 categories,
-                products, 
+                products,
                 actionRegister, actionLogin,
                 dataUser, actionLogout, getCategory, getProduct,
-                fetchUserData, getOrder, order, updateProfile, getAllOrder
+                fetchUserData, getOrder, order, updateProfile, getAllOrder, loading
             }}
         >
             {children}

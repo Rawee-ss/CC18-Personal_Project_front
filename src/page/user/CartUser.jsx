@@ -21,9 +21,9 @@ export default function CartUser() {
 
   const hdlSubmit = () => {
     if (cartItems.length === 0) {
-    toast.error("No items in the cart, Please add products.")
+      toast.error("No items in the cart, Please add products.")
     }
-    navigate("/user/payment")
+    navigate("/payment")
     toast.success("Create order successfully.")
   }
 
@@ -66,11 +66,11 @@ export default function CartUser() {
             </div>
             <div className='flex justify-center '>
               {cartItems.length > 0 && total > 0 ? (
-               
-                  <button onClick={hdlSubmit} className='bg-blue-900 p-2 rounded-md text-white m-8 hover:bg-blue-700'>
-                    Confirm order
-                  </button>
-                
+
+                <button onClick={hdlSubmit} className='bg-blue-900 p-2 rounded-md text-white m-8 hover:bg-blue-700'>
+                  Confirm order
+                </button>
+
               ) : (
                 <button disabled className='bg-gray-500 p-2 rounded-md text-white m-8'>
                   No items in cart
