@@ -14,7 +14,7 @@ const initialState = {
 }
 
 const UploadProduct = () => {
-  const { token } = useAuth()
+  const token = getAccessToken();
   const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {

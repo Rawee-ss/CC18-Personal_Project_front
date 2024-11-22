@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getAccessToken } from "../../untils/LocalStorage";
+import { getAccessToken } from "../../utils/LocalStorage";
 import { createCart } from "../../api/CartApi";
 import { toast } from "react-toastify";
 import { getProductDetail } from "../../api/ProductsApi";

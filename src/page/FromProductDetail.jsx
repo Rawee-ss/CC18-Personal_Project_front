@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getAccessToken } from "../untils/LocalStorage";
+import { getAccessToken } from "../utils/LocalStorage";
 import { createCart } from "../api/CartApi";
 import { getProductDetail } from "../api/ProductsApi";
 import { Link } from "lucide-react";

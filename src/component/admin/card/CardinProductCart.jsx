@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Trash2 } from 'lucide-react';
 import { deleteItemCart, getCart } from '../../../api/CartApi';
-import { getAccessToken } from '../../../untils/LocalStorage';
+import { getAccessToken } from '../../../utils/LocalStorage';
 
 
-const CardinProductCart = ({ setTotal,setCartItems }) => {
-   
+const CardinProductCart = ({ setTotal, setCartItems }) => {
+
 
     const [cart, setCart] = useState([]);
 
@@ -25,7 +25,7 @@ const CardinProductCart = ({ setTotal,setCartItems }) => {
         };
 
         fetchCart();
-    }, []); 
+    }, []);
 
     const hdlDeleteItem = async (itemId) => {
         try {
@@ -38,7 +38,7 @@ const CardinProductCart = ({ setTotal,setCartItems }) => {
                     return acc + el.price;
                 }, 0);
 
-                setTotal(newTotalPrice); 
+                setTotal(newTotalPrice);
 
                 return updatedCart;
             });
@@ -54,7 +54,7 @@ const CardinProductCart = ({ setTotal,setCartItems }) => {
                 <div key={index} className="w-full">
 
                     <div className="flex h-36 items-center ml-10 p-4 rounded-lg mb-4 shadow-md bg-slate-50">
-                       
+
 
                         <img className="w-24 h-24 rounded-lg object-cover"
                             src={item.products.image}

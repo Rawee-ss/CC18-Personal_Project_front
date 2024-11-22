@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { getItemOrder, updateOrderStatus } from "../../api/OrderApi"
 import { toast } from "react-toastify"
-import { getAccessToken } from "../../untils/LocalStorage"
+import { getAccessToken } from "../../utils/LocalStorage"
 
 
 const FromStatusOrder = () => {

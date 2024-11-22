@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { currentUser, login, register } from '../api/AuthApi';
 import { toast } from 'react-toastify';
-import { getAccessToken, removeAccessToken, setAccessToken } from '../untils/LocalStorage';
+import { getAccessToken, removeAccessToken, setAccessToken } from '../utils/LocalStorage';
 import { getAllCategory } from '../api/CategoryApi';
 import { getProducts } from '../api/ProductsApi';
 import { getAllOrderApi, getItemOrder, getOrderApi } from '../api/OrderApi';
@@ -12,13 +12,11 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [role, setRole] = useState(null)
-    const [token, setToken] = useState(null)
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [order, setOrder] = useState([]);
     const [dataUser, setDataUser] = useState(null);
     const [editValue, setEditValue] = useState({})
-    const [itemOrder, setItemOrder] = useState([]);
     const [loading, setLoading] = useState(false)
 
 
@@ -33,7 +31,6 @@ export const AuthProvider = ({ children }) => {
                 setUser(resp.data.member.userName);
                 setDataUser(resp.data.member)
                 setRole(resp.data.member.role);
-                setToken(token)
                 return resp
             } catch (err) {
                 toast.error('Failed to fetch user data. Please log in again.');
@@ -52,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
     const actionRegister = async (form) => {
         try {
-            const resp = await register(form);
+            await register(form);
             toast.success('register success');
         } catch (err) {
             toast.error('try register again');
@@ -62,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     const updateProfile = async (form) => {
         console.log('form====', form)
         try {
-            const resp = await updateUserProfile(form);
+            await updateUserProfile(form);
             toast.success('updateProfile success');
         } catch (err) {
             toast.error('try updateProfile again');
@@ -73,13 +70,12 @@ export const AuthProvider = ({ children }) => {
         try {
             const resp = await login(form);
             console.log(resp.data.user, "hi jukkru")
-            toast.success('Login success');
             setRole(resp.data.role)
             setUser(resp.data.user);
-            setToken(resp.data.token);
             setAccessToken(resp.data.token);
             setDataUser(resp.data.dataUser)
             localStorage.setItem("user", JSON.stringify(resp.data.user))
+            toast.success('Login success');
             return resp.data.user.role;
         } catch (err) {
             toast.error('Login failed. Please try again.');
@@ -90,7 +86,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.clear();
         setRole(null);
         setUser(null);
-        setToken(null);
         setDataUser(null)
     };
 
@@ -107,7 +102,6 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await getProducts(count);
             setProducts(res.data.products);
-            console.log(res.data.products)
         } catch (err) {
             console.log(err);
         }
@@ -117,7 +111,6 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await getOrderApi();
             setOrder(res.data.getOrder);
-            console.log(res.data.getOrder)
         } catch (err) {
             console.log(err);
         }
@@ -127,7 +120,6 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await getAllOrderApi();
             setOrder(res.data.getAllOrder);
-            console.log(res.data.getAllOrder)
         } catch (err) {
             console.log(err);
         }
@@ -141,7 +133,6 @@ export const AuthProvider = ({ children }) => {
                 setEditValue,
                 user,
                 role,
-                token,
                 categories,
                 products,
                 actionRegister, actionLogin,

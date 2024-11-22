@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import validateRegister from '../../untils/Validator'
+import validateRegister from '../../utils/Validator'
 import { register } from "../../api/AuthApi"
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
@@ -35,7 +35,7 @@ function Register() {
 
       return setFormErrors(error)
     }
-    console.log("Registration successful:", form);
+    // console.log("Registration successful:", form);
     try {
       await actionRegister(form);
       setSuccessMessage("Registration successful!");

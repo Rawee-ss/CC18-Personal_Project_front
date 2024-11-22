@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAccessToken } from "../untils/LocalStorage";
+import { getAccessToken } from "../utils/LocalStorage";
 
 axios.defaults.baseURL = "http://localhost:8000";
 
@@ -14,4 +14,4 @@ axios.interceptors.request.use(
   (err) => Promise.reject(err)
 );
 
-export default axios
+export default axios;

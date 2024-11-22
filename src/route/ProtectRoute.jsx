@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Navigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext";
 import { currentUser } from "../api/AuthApi";
-import { getAccessToken } from "../untils/LocalStorage";
+import { getAccessToken } from "../utils/LocalStorage";
 
 const ProtectRoute = ({ element, allow }) => {
     const [isAllowed, setIsAllowed] = useState(null)

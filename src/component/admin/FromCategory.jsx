@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { createCategory, getAllCategory, deleteCategory } from '../../api/CategoryApi'
 import { AuthProvider, useAuth } from '../../context/AuthContext'
 import { toast } from 'react-toastify'
-import { getAccessToken } from '../../untils/LocalStorage'
+import { getAccessToken } from '../../utils/LocalStorage'
 
 export const FromCategory = () => {
-    // const { token } = useAuth()
     const token = getAccessToken();
     const [name, setName] = useState("")
     const [categories, setCategories] = useState([])

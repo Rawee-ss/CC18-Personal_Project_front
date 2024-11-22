@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAccessToken } from "../../untils/LocalStorage";
+import { getAccessToken } from "../../utils/LocalStorage";
 import { createCart } from "../../api/CartApi";
 import { toast } from "react-toastify";
 import { getProductDetail } from "../../api/ProductsApi";
@@ -11,7 +11,7 @@ const FromProductDetailAdmin = ({ item }) => {
   const { id } = useParams()
 
 
- 
+
 
 
   const findProduct = async () => {

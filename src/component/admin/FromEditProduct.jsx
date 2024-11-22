@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { creatProducts, getProductDetail, updateProducts } from '../../api/ProductsApi';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { getAccessToken } from '../../untils/LocalStorage';
+import { getAccessToken } from '../../utils/LocalStorage';
 
 
 const initialState = {

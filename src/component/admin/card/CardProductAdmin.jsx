@@ -1,7 +1,7 @@
 import { ShoppingCart } from 'lucide-react'
 import React from 'react'
 import { createCart } from '../../../api/CartApi'
-import { getAccessToken } from '../../../untils/LocalStorage'
+import { getAccessToken } from '../../../utils/LocalStorage'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 

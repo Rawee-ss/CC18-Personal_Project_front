@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllOrderApi, getItemOrder, saveOrder, updateOrderStatus } from '../../api/OrderApi';
-import { getAccessToken } from '../../untils/LocalStorage';
+import { getAccessToken } from '../../utils/LocalStorage';
 import { getCart } from '../../api/CartApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';

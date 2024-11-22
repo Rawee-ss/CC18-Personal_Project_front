@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Trash2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { saveOrder } from '../../api/OrderApi';
-import { getAccessToken } from '../../untils/LocalStorage';
+import { getAccessToken } from '../../utils/LocalStorage';
 import { getCart } from '../../api/CartApi';
 import axios from 'axios';
 import { toast } from 'react-toastify';

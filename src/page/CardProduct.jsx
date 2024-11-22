@@ -1,6 +1,6 @@
 import React from 'react'
 import { ShoppingCart } from 'lucide-react'
-import { getAccessToken } from '../untils/LocalStorage'
+import { getAccessToken } from '../utils/LocalStorage'
 import { createCart } from '../api/CartApi'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'

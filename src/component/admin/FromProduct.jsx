@@ -3,7 +3,7 @@ import { useAuth, AuthProvider } from '../../context/AuthContext'
 import { creatProducts, deleteProduct } from '../../api/ProductsApi'
 import UploadProduct from './FromCreateProduct'
 import { Link, useNavigate } from 'react-router-dom'
-import { getAccessToken } from '../../untils/LocalStorage'
+import { getAccessToken } from '../../utils/LocalStorage'
 import { Pencil, Trash2 } from 'lucide-react';
 
 
@@ -109,16 +109,16 @@ const FormProduct = () => {
                                     {/* <td>{item.categoryId}</td> */}
                                     <td >
                                         <div className='flex items-center justify-center'>
-                                        <button onClick={() => handleEdit(item)}
-                                            className='text-white mr-2 bg-yellow-500 rounded-md p-1 hover:scale-105'>
-                                            <Pencil />
-                                        </button>
+                                            <button onClick={() => handleEdit(item)}
+                                                className='text-white mr-2 bg-yellow-500 rounded-md p-1 hover:scale-105'>
+                                                <Pencil />
+                                            </button>
 
-                                        <button
-                                            className='bg-red-500 rounded-md p-1 shadow-md hover:scale-105 text-white '
-                                            onClick={() => handleDelete(item.id)}>
-                                            <Trash2 />
-                                        </button>
+                                            <button
+                                                className='bg-red-500 rounded-md p-1 shadow-md hover:scale-105 text-white '
+                                                onClick={() => handleDelete(item.id)}>
+                                                <Trash2 />
+                                            </button>
                                         </div>
 
                                     </td>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { getAccessToken } from '../../untils/LocalStorage'
+import { getAccessToken } from '../../utils/LocalStorage'
 import { getProductDetail } from '../../api/ProductsApi'
 import { getStore, updateStatus } from '../../api/StoreApi'
 
