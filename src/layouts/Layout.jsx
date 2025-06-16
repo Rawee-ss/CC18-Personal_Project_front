@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainNav from '../component/MainNav'
 import { json, Outlet } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import AdminHeader from '../component/admin/AdminHeader'
 
 export default function Layout() {
-    // const { role } = useAuth()
-    const user = localStorage.getItem("user")
-    const role = JSON.parse(user)?.role
+    const { role } = useAuth()
+
     return (
         <div className='flex h-screen w-screen'>
             <div className='flex flex-col flex-1 '>

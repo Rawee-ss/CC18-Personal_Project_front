@@ -131,7 +131,7 @@ const FromEditProduct = () => {
                     <label><b>Price: </b></label>
                     <input
                         className='p-3 h-8 w-[15vw]  flex items-center rounded-sm'
-                        type="text"
+                        type="number"
                         name="price"
                         value={product?.price}
                         onChange={handleChange}

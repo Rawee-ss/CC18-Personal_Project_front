@@ -10,7 +10,6 @@ export default function Home() {
   const [products, setProducts] = useState([])
 
   const { role } = useAuth()
-  console.log(role, "ROLE")
 
 
   const getAllProduct = async () => {

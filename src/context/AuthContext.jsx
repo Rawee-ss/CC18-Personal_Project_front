@@ -22,12 +22,10 @@ export const AuthProvider = ({ children }) => {
 
     const fetchUserData = async () => {
         const token = getAccessToken();
-        console.log(token, "TOKEN")
         if (token) {
             try {
                 setLoading(true)
                 const resp = await currentUser(token);
-                console.log(resp, "FETCH DATA")
                 setUser(resp.data.member.userName);
                 setDataUser(resp.data.member)
                 setRole(resp.data.member.role);
@@ -57,7 +55,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const updateProfile = async (form) => {
-        console.log('form====', form)
         try {
             await updateUserProfile(form);
             toast.success('updateProfile success');
@@ -69,12 +66,10 @@ export const AuthProvider = ({ children }) => {
     const actionLogin = async (form) => {
         try {
             const resp = await login(form);
-            console.log(resp.data.user, "hi jukkru")
-            setRole(resp.data.role)
+            setRole(resp.data.user.role);
             setUser(resp.data.user);
             setAccessToken(resp.data.token);
             setDataUser(resp.data.dataUser)
-            localStorage.setItem("user", JSON.stringify(resp.data.user))
             toast.success('Login success');
             return resp.data.user.role;
         } catch (err) {
@@ -125,7 +120,6 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    console.log(dataUser, 'datauser-context')
     return (
         <AuthContext.Provider
             value={{

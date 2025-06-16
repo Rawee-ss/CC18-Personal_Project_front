@@ -8,27 +8,28 @@ import { getAccessToken } from "../utils/LocalStorage";
 const ProtectRoute = ({ element, allow }) => {
     const [isAllowed, setIsAllowed] = useState(null)
     const [loading, setLoading] = useState(true)
-    // const { user, fetchUserData } = useAuth()
+    const { user, fetchUserData } = useAuth()
     const token = getAccessToken()
-    const user = JSON.parse(localStorage.getItem("user"))
+    // const user = JSON.parse(localStorage.getItem("user"))
+    const checkRole = async () => {
+        console.log(user, "USER")
+
+        try {
+            if (user) {
+                const role = user.role;
+                setIsAllowed(allow.includes(role));
+            } else {
+                setIsAllowed(false);
+            }
+        } catch (err) {
+            console.error("Error fetching role:", err);
+            setIsAllowed(false);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const checkRole = async () => {
-            try {
-                if (user) {
-                    const role = user.role;
-                    setIsAllowed(allow.includes(role));
-                } else {
-                    setIsAllowed(false);
-                }
-            } catch (err) {
-                console.error("Error fetching role:", err);
-                setIsAllowed(false);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         checkRole();
     }, []);
 

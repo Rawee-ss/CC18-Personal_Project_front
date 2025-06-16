@@ -7,6 +7,7 @@ import UserSidebar from './user/UserSidebar'
 
 export default function MainNav() {
   const { user } = useAuth()
+  console.log(user, "Main nav")
   return (
     <div className='bg-blue-950'>
       <div className=' text-white flex justify-between h-20 w-full items-center px-4 gap-4'>

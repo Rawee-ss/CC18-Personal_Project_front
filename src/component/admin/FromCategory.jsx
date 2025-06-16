@@ -28,13 +28,11 @@ export const FromCategory = () => {
 
     const hdlOnSubmit = async (e) => {
         e.preventDefault()
-        console.log({ name })
         if (!name) {
             return toast.warning("plese fill data")
         }
         try {
             const res = await createCategory(token, { name })
-            console.log(res.data.name)
             toast.success(`add ${res.data.name} success`)
             getCategory(token)
         } catch (err) {
