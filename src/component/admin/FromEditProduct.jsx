@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { getAccessToken } from '../../utils/LocalStorage';
 
-
+console.log("first")
 const initialState = {
     name: '',
     detail: '',
