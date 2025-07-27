@@ -6,15 +6,11 @@ import { Link } from 'react-router-dom';
 
 export default function OrderUser() {
 
-  const { getOrder, getAllOrder, order, role } = useAuth()
+  const { getOrder, order } = useAuth()
   console.log('order here', order)
 
   useEffect(() => {
-    if (role == "USER") {
-      getOrder()
-    } else {
-      getAllOrder()
-    }
+    getOrder()
   }, [])
 
   return (

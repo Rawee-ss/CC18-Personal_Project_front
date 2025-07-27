@@ -109,23 +109,21 @@ export const AuthProvider = ({ children }) => {
 
     const getOrder = async () => {
         try {
-            const res = await getOrderApi();
-            setOrder(res.data.getOrder);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+            if (role == "USER") {
 
-    const getAllOrder = async () => {
-        try {
+                const res = await getOrderApi();
+                setOrder(res.data.getOrder);
+                return
+            }
             const res = await getAllOrderApi();
             setOrder(res.data.getAllOrder);
+
         } catch (err) {
             console.log(err);
         }
     };
 
-    console.log(dataUser, 'datauser-context')
+
     return (
         <AuthContext.Provider
             value={{
@@ -137,7 +135,7 @@ export const AuthProvider = ({ children }) => {
                 products,
                 actionRegister, actionLogin,
                 dataUser, actionLogout, getCategory, getProduct,
-                fetchUserData, getOrder, order, updateProfile, getAllOrder, loading
+                fetchUserData, getOrder, order, updateProfile, loading
             }}
         >
             {children}
